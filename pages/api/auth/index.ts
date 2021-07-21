@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
 import { sign } from "jsonwebtoken";
 import { compare } from "bcrypt";
 import dbConnect from "../../../utils/dbConnect";
@@ -49,7 +49,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           }
         });
 
-        return mongoose.connection.close();
+        return;
       } catch (error) {
         if (error) return res.status(400).send(error);
       }

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
 import dbConnect from "../../../utils/dbConnect";
 const Loadout = require("../../../models/Loadout");
 import auth from "../../../utils/authMiddleware";
@@ -42,7 +42,7 @@ export default auth(
 
           res.send(loadout);
 
-          return mongoose.connection.close();
+          return;
         } catch (error) {
           if (error) return res.status(400).send(error);
         }
@@ -57,7 +57,7 @@ export default auth(
 
           res.send(loadouts);
 
-          return mongoose.connection.close();
+          return;
         } catch (error) {
           if (error) return res.status(400).send(error);
         }

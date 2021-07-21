@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
 import auth from "../../../utils/authMiddleware";
 import dbConnect from "../../../utils/dbConnect";
 const Loadout = require("../../../models/Loadout");
@@ -29,7 +29,7 @@ export default auth(async (req: NextApiRequest, res: NextApiResponse) => {
 
         res.json({ msg: "Loadout Removed" });
 
-        return mongoose.connection.close();
+        return;
       } catch (error) {
         if (error) return res.status(400).send(error);
       }
