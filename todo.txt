@@ -1,0 +1,12 @@
+
+middleware for deleting stuff
+has to be admin to delete user
+has to be loadout owner to delete it
+ 
+ Get stats of 20 last matches
+ Get stats of lifetime
+ Determine if the player has evolved in the last matches in comparison to lifetime
+ Show stats affected
+ Save the best match loadout
+
+update untilt to use bcrypt
