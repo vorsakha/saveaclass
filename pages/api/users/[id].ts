@@ -1,9 +1,15 @@
+import { NextApiRequest, NextApiResponse } from "next";
+import mongoose from "mongoose";
+import auth from "../../../utils/authMiddleware";
 import dbConnect from "../../../utils/dbConnect";
-const UserModel = require("../../../models/UserModel");
+const User = require("../../../models/User");
 
 dbConnect();
 
-export default async (req, res) => {
+// @route api/users/:id
+// @access Private
+
+export default auth(async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     query: { id },
     method,
@@ -11,18 +17,28 @@ export default async (req, res) => {
 
   switch (method) {
     case "DELETE":
-      // Delete user by id
+      // @desc Delete user by id
       try {
-        const user = await UserModel.findById(id);
+        const user = await User.findById(id);
+
+        if (!user) {
+          return res.status(400).json({ error: "No user found." });
+        }
 
         await user.remove();
+
+        res.json({ msg: "User removed." });
+
+        return mongoose.connection.close();
       } catch (error) {
-        if (error) return res.status(400).send(error);
+        if (error) console.log(error);
+        if (error) return res.status(400).send("Server Error");
       }
 
       break;
 
     default:
+      res.status(400).json({ msg: "Wrong Method." });
       break;
   }
-};
+});

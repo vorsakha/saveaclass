@@ -1,9 +1,15 @@
+import { NextApiRequest, NextApiResponse } from "next";
+import mongoose from "mongoose";
+import auth from "../../../utils/authMiddleware";
 import dbConnect from "../../../utils/dbConnect";
-const LoadoutModel = require("../../../models/LoadoutModel");
+const Loadout = require("../../../models/Loadout");
 
 dbConnect();
 
-export default async (req, res) => {
+// @route api/loadouts/:id
+// @access Private
+
+export default auth(async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     query: { id },
     method,
@@ -11,11 +17,19 @@ export default async (req, res) => {
 
   switch (method) {
     case "DELETE":
-      // Delete loadout by id
+      // @desc Delete loadout by id
       try {
-        const loadout = await LoadoutModel.findById(id);
+        const loadout = await Loadout.findById(id);
+
+        if (!loadout) {
+          return res.status(404).json({ msg: "Loadout not found." });
+        }
 
         await loadout.remove();
+
+        res.json({ msg: "Loadout Removed" });
+
+        return mongoose.connection.close();
       } catch (error) {
         if (error) return res.status(400).send(error);
       }
@@ -23,6 +37,7 @@ export default async (req, res) => {
       break;
 
     default:
+      res.status(400).json({ msg: "Wrong Method." });
       break;
   }
-};
+});

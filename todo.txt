@@ -3,10 +3,17 @@ middleware for deleting stuff
 has to be admin to delete user
 has to be loadout owner to delete it
  
- Get stats of 20 last matches
- Get stats of lifetime
- Determine if the player has evolved in the last matches in comparison to lifetime
- Show stats affected
- Save the best match loadout
+Get stats of 20 last matches
+Get stats of lifetime
+Determine if the player has evolved in the last matches in comparison to lifetime
+Show stats affected
+Save the best match loadout
 
 update untilt to use bcrypt
+
+
+* Issues 
+- There's apparently a issue with NextJS building everything, it seems like it's trying to create a new model whenever I use any function from UserModel. This is fixed exporting the already created model
+
+- NextApiRequest
+I had to find out how to merge some more types to the NextApiRequest for a piece of code that required it in strict typescript
