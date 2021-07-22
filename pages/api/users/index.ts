@@ -1,20 +1,25 @@
 import { NextApiRequest, NextApiResponse } from "next";
-// import mongoose from "mongoose";
 import { hash } from "bcrypt";
 import dbConnect from "../../../utils/dbConnect";
 const User = require("../../../models/User");
 
 dbConnect();
 
+type LoadoutRequest = NextApiRequest & {
+  user: {
+    id: string;
+  };
+};
+
 // @route api/users
 // @access Public
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (req: LoadoutRequest, res: NextApiResponse) => {
   const { method } = req;
 
   switch (method) {
+    // @desc Create user
     case "POST":
-      // @desc Create user
       try {
         const userExists = await User.findOne({ email: req.body.email });
 
@@ -44,6 +49,16 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         if (error) return res.status(400).send(error);
       }
       break;
+
+    // @desc Get user by token
+    case "GET":
+      try {
+        const user = await User.findById(req.user.id).select("-password");
+
+        res.json(user);
+      } catch (error) {
+        if (error) return res.status(400).send(error);
+      }
 
     default:
       res.status(400).json({ msg: "Wrong Method." });

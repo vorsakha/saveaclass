@@ -2,19 +2,14 @@ import { verify } from "jsonwebtoken";
 import { NextApiRequest, NextApiResponse, NextApiHandler } from "next";
 
 //Types
-type NextApiRequestWithUser = NextApiRequest & {
-  user?: {
-    id: string;
-  };
-};
-type WithUser = {
+interface NextApiRequestWithUser extends NextApiRequest {
   user: {
     id: string;
   };
-};
+}
 
 const auth =
-  (fn: NextApiHandler<WithUser>) =>
+  (fn: NextApiHandler) =>
   async (req: NextApiRequestWithUser, res: NextApiResponse) => {
     try {
       //-> Get token from header
@@ -29,7 +24,7 @@ const auth =
 
       const decoded: any = verify(token, process.env.JWT_SECRET as string);
 
-      // Save user ID on req.user
+      // Save logged user ID on req.user
       req.user = decoded.user;
 
       return await fn(req, res);

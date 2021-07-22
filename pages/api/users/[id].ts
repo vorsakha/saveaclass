@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-// import mongoose from "mongoose";
 import auth from "../../../utils/authMiddleware";
 import dbConnect from "../../../utils/dbConnect";
 const User = require("../../../models/User");

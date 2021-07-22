@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-// import mongoose from "mongoose";
 import auth from "../../../utils/authMiddleware";
 import dbConnect from "../../../utils/dbConnect";
 const Loadout = require("../../../models/Loadout");
@@ -9,7 +8,7 @@ dbConnect();
 // @route api/loadouts/:id
 // @access Private
 
-export default auth(async (req: NextApiRequest, res: NextApiResponse) => {
+export default auth(async (req: any, res: NextApiResponse) => {
   const {
     query: { id },
     method,
@@ -27,7 +26,11 @@ export default auth(async (req: NextApiRequest, res: NextApiResponse) => {
 
         await loadout.remove();
 
-        res.json({ msg: "Loadout Removed" });
+        const loadouts = await Loadout.find({ user: req.user.id }).sort({
+          date: -1,
+        });
+
+        res.send(loadouts);
 
         return;
       } catch (error) {

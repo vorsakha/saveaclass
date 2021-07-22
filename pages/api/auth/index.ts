@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-// import mongoose from "mongoose";
 import { sign } from "jsonwebtoken";
 import { compare } from "bcrypt";
 import dbConnect from "../../../utils/dbConnect";
