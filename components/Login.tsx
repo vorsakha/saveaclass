@@ -51,7 +51,10 @@ const Login: React.FC = () => {
   return (
     <>
       <h1 className="flex flex-col md:block md:text-6xl text-5xl font-bold">
-        Welcome to <span className="text-green-500  w-full">Save a Class</span>
+        Welcome to{" "}
+        <span className="text-green-500 font-blops font-thin uppercase w-full">
+          Save a Class
+        </span>
       </h1>
 
       <div className="w-full max-w-md mt-6">
