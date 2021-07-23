@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../Redux/utils/hooks";
 import Button from "./common/button";
 import LoadingSpinner from "./common/loading";
 
-// Types
+// Types //
 type FormTypes = {
   email: string;
   password: string;
