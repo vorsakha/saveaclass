@@ -1,20 +1,24 @@
 import Head from "next/head";
+
+// Redux
+import { useAppSelector } from "../Redux/utils/hooks";
+
+// Components
+import Dashboard from "../components/Dashboard";
 import Login from "../components/Login";
 
 const Home = () => {
+  const { loggedIn } = useAppSelector((state) => state.auth);
+
   return (
     <>
       <Head>
-        <title>Login | Save a Class</title>
+        <title>{loggedIn ? "Save a Class" : "Login | Save a Class"}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className="flex flex-col items-center justify-center w-full flex-1 md:px-20 text-center">
-        <h1 className="flex flex-col md:block md:text-6xl text-5xl font-bold">
-          Welcome to{" "}
-          <span className="text-green-500  w-full">Save a Class</span>
-        </h1>
-        <Login />
+        {loggedIn ? <Dashboard /> : <Login />}
       </main>
     </>
   );

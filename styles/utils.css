@@ -12,11 +12,3 @@
 * {
   color: rgb(232, 232, 232);
 }
-
-a {
-  font-weight: bold;
-}
-a:hover {
-  color: #10b981;
-  text-decoration: underline;
-}
