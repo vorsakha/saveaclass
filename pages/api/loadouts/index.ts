@@ -1,14 +1,7 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiResponse } from "next";
 import dbConnect from "../../../utils/dbConnect";
 const Loadout = require("../../../models/Loadout");
 import auth from "../../../utils/authMiddleware";
-
-//Types
-// type LoadoutRequest = NextApiRequest & {
-//   user: {
-//     id: string;
-//   };
-// };
 
 dbConnect();
 

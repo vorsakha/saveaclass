@@ -9,7 +9,7 @@ export const loadUser = createAsyncThunk("auth/loadUser", async () => {
     setAuthToken(localStorage.token);
   }
 
-  const res = await axios.get(`${url}/user`);
+  const res = await axios.get(`${url}/users/load`);
 
   return res.data;
 });

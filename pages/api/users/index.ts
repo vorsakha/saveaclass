@@ -55,7 +55,7 @@ export default async (req: LoadoutRequest, res: NextApiResponse) => {
       try {
         const user = await User.findById(req.user.id).select("-password");
 
-        res.send(user);
+        return res.send(user);
       } catch (error) {
         if (error) return res.status(400).send(error);
       }

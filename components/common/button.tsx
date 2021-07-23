@@ -21,7 +21,7 @@ const Button: React.FC<ButtonTypes> = ({
       className={`${
         success && "hover:bg-green-600 bg-green-500 focus:bg-green-600"
       } ${
-        danger && "hover:bg-gray-500 bg-gray-400 focus:bg-gray-500"
+        danger && "hover:bg-gray-400 bg-gray-500 focus:bg-gray-400"
       }  ${className} px-6 py-2 rounded font-medium inline-block shadow-lg   ring-black ring-opacity-5 transition ease-in-out disabled:opacity-40`}
     >
       {children}
