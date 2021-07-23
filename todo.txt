@@ -17,3 +17,18 @@ update untilt to use bcrypt
 
 - NextApiRequest
 I had to find out how to merge some more types to the NextApiRequest for a piece of code that required it in strict typescript
+
+- localStorage
+had to write checks to localStorage availability due to server side rendering of nextjs
+Window, and document are not available on the server. This is why you'll run into these types of errors if you are trying to access window properties or document.
+In my case, I was persisting my authentication token to localStorage on the previous application.
+
+To avoid running into these undefined errors at compile and build time, you can run a simple check.
+
+- Font change tailwind
+The "extend" functionality allows you to add your font(s) alongside the existing font utilities.
+
+Add a theme.extend.fontFamily section to your Tailwind config
+
+- Type safety with extraReducers
+Was getting an error regarding putting a promise inside a redux state. Resolved it by searching through the redux toolkit documentation and correctly making "action" type safe.

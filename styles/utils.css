@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap");
 
 @layer utilities {
   .min-h-total {
@@ -10,4 +11,12 @@
 
 * {
   color: rgb(232, 232, 232);
+}
+
+a {
+  font-weight: bold;
+}
+a:hover {
+  color: #10b981;
+  text-decoration: underline;
 }

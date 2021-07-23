@@ -3,35 +3,47 @@ import { signUp } from "./userThunk";
 
 type StateTypes = {
   loading: boolean;
-  error?: null | string;
-  success?: null | string;
+  alert: {
+    type: string | null;
+    msg: string | null;
+  };
 };
 
 const slice = createSlice({
   name: "user",
   initialState: {
     loading: false,
-    error: null,
-    success: null,
+    alert: {
+      type: null,
+      msg: null,
+    },
   },
   reducers: {
     clearUserAlert: (state) => {
-      state.success = null;
-      state.error = null;
+      state.alert = {
+        type: null,
+        msg: null,
+      };
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(signUp.fulfilled, (state: StateTypes) => {
         state.loading = false;
-        state.success = "Account created.";
+        state.alert = {
+          type: "success",
+          msg: "Account created.",
+        };
       })
       .addCase(signUp.pending, (state: StateTypes) => {
         state.loading = true;
       })
       .addCase(signUp.rejected, (state: StateTypes) => {
         state.loading = false;
-        state.error = "Failed creating account.";
+        state.alert = {
+          type: "danger",
+          msg: "Failed creating account.",
+        };
       });
   },
 });

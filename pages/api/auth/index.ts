@@ -42,7 +42,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
               { expiresIn: 3600 },
               (err: any, token) => {
                 if (err) throw err;
-                res.json({ user: user.email, token });
+                res.json({
+                  user: user.email,
+                  admin: user.admin,
+                  token,
+                });
               }
             );
           }

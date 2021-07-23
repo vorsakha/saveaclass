@@ -4,8 +4,10 @@ import { loadLoadouts, createLoadout, deleteLoadout } from "./loadoutThunk";
 type StateTypes = {
   loadouts?: any;
   loading: boolean;
-  error?: null | string;
-  success?: null | string;
+  alert: {
+    type: string | null;
+    msg: string | null;
+  };
 };
 
 const slice = createSlice({
@@ -13,8 +15,10 @@ const slice = createSlice({
   initialState: {
     loadouts: [{}],
     loading: false,
-    error: null,
-    success: null,
+    alert: {
+      type: null,
+      msg: null,
+    },
   },
   reducers: {
     clearLoadouts: (state) => {
@@ -22,8 +26,10 @@ const slice = createSlice({
       state.loadouts = [{}];
     },
     clearLoadoutsAlert: (state) => {
-      state.success = null;
-      state.error = null;
+      state.alert = {
+        type: null,
+        msg: null,
+      };
     },
   },
   extraReducers: (builder) => {
@@ -40,24 +46,36 @@ const slice = createSlice({
       })
       .addCase(loadLoadouts.rejected, (state: StateTypes) => {
         state.loading = false;
-        state.error = "Failed loading loadouts.";
+        state.alert = {
+          type: "danger",
+          msg: "Failed loading loadouts.",
+        };
       })
       .addCase(createLoadout.fulfilled, (state: StateTypes) => {
         state.loading = false;
-        state.success = "Loadout saved.";
+        state.alert = {
+          type: "success",
+          msg: "Loadout saved.",
+        };
       })
       .addCase(createLoadout.pending, (state: StateTypes) => {
         state.loading = true;
       })
       .addCase(createLoadout.rejected, (state: StateTypes) => {
         state.loading = false;
-        state.error = "Failed saving loadouts.";
+        state.alert = {
+          type: "danger",
+          msg: "Failed saving loadouts.",
+        };
       })
       .addCase(
         deleteLoadout.fulfilled,
         (state: StateTypes, action: PayloadAction<object>) => {
           state.loading = false;
-          state.success = "Loadout deleted.";
+          state.alert = {
+            type: "success",
+            msg: "Loadout deleted.",
+          };
           state.loadouts = action.payload;
         }
       )
@@ -66,7 +84,10 @@ const slice = createSlice({
       })
       .addCase(deleteLoadout.rejected, (state: StateTypes) => {
         state.loading = false;
-        state.error = "Failed deleting loadouts.";
+        state.alert = {
+          type: "danger",
+          msg: "Failed deleting loadouts.",
+        };
       });
   },
 });

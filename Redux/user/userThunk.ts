@@ -9,9 +9,9 @@ export const loadUser = createAsyncThunk("auth/loadUser", async () => {
     setAuthToken(localStorage.token);
   }
 
-  const res = await axios.get(`${url}/user`);
+  const res = await axios.get(`${url}/users`);
 
-  return res;
+  return res.data;
 });
 
 export const logUser = createAsyncThunk(
@@ -25,7 +25,7 @@ export const logUser = createAsyncThunk(
 
     const res = await axios.post(`${url}/auth`, body, config);
 
-    return res;
+    return res.data;
   }
 );
 
@@ -38,8 +38,8 @@ export const signUp = createAsyncThunk(
       },
     };
 
-    const res = await axios.post(`${url}/auth/users`, body, config);
+    const res = await axios.post(`${url}/users`, body, config);
 
-    return res;
+    return res.data;
   }
 );

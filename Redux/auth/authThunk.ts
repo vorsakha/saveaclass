@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import setAuthToken from "../utils/setAuthToken";
 
 const url = process.env.API_URL;
@@ -11,7 +11,7 @@ export const loadUser = createAsyncThunk("auth/loadUser", async () => {
 
   const res = await axios.get(`${url}/user`);
 
-  return res;
+  return res.data;
 });
 
 export const logUser = createAsyncThunk(
@@ -25,6 +25,6 @@ export const logUser = createAsyncThunk(
 
     const res = await axios.post(`${url}/auth`, body, config);
 
-    return res;
+    return res.data;
   }
 );

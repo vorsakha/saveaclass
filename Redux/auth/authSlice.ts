@@ -4,81 +4,95 @@ import { loadUser, logUser } from "./authThunk";
 // Types
 type StateTypes = {
   loggedIn?: boolean;
-  admin?: boolean;
-  token?: string | null;
-  error?: string | null;
+  alert?: {
+    type: string | null;
+    msg: string | null;
+  };
   loading: boolean;
-  user?: string | null;
+  admin: boolean;
+  token: string | null;
+  user: string | null;
 };
 
-type LogPayload = {
-  data: {
-    token: string;
-    user: string;
-    admin: boolean;
-  };
+const tokenTest = () => {
+  if (typeof window !== "undefined") {
+    return localStorage.getItem("token");
+  } else {
+    return null;
+  }
 };
 
 const slice = createSlice({
   name: "auth",
   initialState: {
-    token: localStorage.getItem("token"),
+    token: tokenTest(),
     user: null,
     admin: false,
     loggedIn: false,
     loading: false,
-    error: null,
-  },
+    alert: {
+      type: null,
+      msg: null,
+    },
+  } as StateTypes,
+
   reducers: {
-    signOut: (state: StateTypes) => {
+    signOut: (state) => {
       state.loggedIn = false;
       state.admin = false;
-      localStorage.removeItem("token");
+      localStorage !== undefined && localStorage.removeItem("token");
       state.token = null;
-      state.error = null;
+      state.alert = {
+        type: null,
+        msg: null,
+      };
       state.loading = false;
       state.user = null;
     },
-    clearAuthAlert: (state: StateTypes) => {
-      state.error = null;
+    clearAuthAlert: (state) => {
+      state.alert = {
+        type: null,
+        msg: null,
+      };
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(
-        logUser.fulfilled,
-        (state: StateTypes, action: PayloadAction<LogPayload>) => {
-          localStorage.setItem("token", action.payload.data.token);
-          state.token = action.payload.data.token;
-          state.user = action.payload.data.user;
-          state.admin = action.payload.data.admin;
-          state.loggedIn = true;
-          state.loading = false;
-        }
-      )
-      .addCase(logUser.pending, (state: StateTypes) => {
-        state.loading = true;
-        state.error = null;
+      .addCase(logUser.fulfilled, (state, action) => {
+        localStorage !== undefined &&
+          localStorage.setItem("token", action.payload.token);
+        state.token = action.payload.token;
+        state.user = action.payload.user;
+        state.admin = action.payload.admin;
+        state.loggedIn = true;
+        state.loading = false;
       })
-      .addCase(logUser.rejected, (state: StateTypes) => {
+      .addCase(logUser.pending, (state) => {
+        state.loading = true;
+        state.alert = {
+          type: null,
+          msg: null,
+        };
+      })
+      .addCase(logUser.rejected, (state) => {
         state.loggedIn = false;
         state.loading = false;
-        state.error = "Invalid Credentials";
+        state.alert = {
+          type: "danger",
+          msg: "Invalid Credentials",
+        };
         state.user = null;
       })
-      .addCase(
-        loadUser.fulfilled,
-        (state: StateTypes, action: PayloadAction<LogPayload>) => {
-          state.admin = action.payload.data.admin;
-          state.user = action.payload.data.user;
-          state.loggedIn = true;
-          state.loading = false;
-        }
-      )
-      .addCase(loadUser.pending, (state: StateTypes) => {
+      .addCase(loadUser.fulfilled, (state, action) => {
+        state.admin = action.payload.admin;
+        state.user = action.payload.user;
+        state.loggedIn = true;
+        state.loading = false;
+      })
+      .addCase(loadUser.pending, (state) => {
         state.loading = true;
       })
-      .addCase(loadUser.rejected, (state: StateTypes) => {
+      .addCase(loadUser.rejected, (state) => {
         state.loggedIn = false;
         state.loading = false;
       });
