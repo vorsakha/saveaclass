@@ -4,6 +4,7 @@ type ButtonTypes = {
   danger?: boolean;
   className?: string;
   type?: "button" | "submit" | "reset" | undefined;
+  disabled?: boolean;
 };
 
 const Button: React.FC<ButtonTypes> = ({
@@ -13,10 +14,12 @@ const Button: React.FC<ButtonTypes> = ({
   danger,
   className = "",
   type = "button",
+  disabled,
 }) => {
   return (
     <button
       type={type}
+      disabled={disabled}
       onClick={click}
       className={`${
         success && "hover:bg-green-600 bg-green-500 focus:bg-green-600"

@@ -8,9 +8,9 @@ const Layout: React.FC = ({ children }) => {
     <div className="min-w-screen bg-gray-700">
       <Navbar />
       <Alert />
-      <div className="flex flex-col items-center justify-center m-auto max-w-screen-lg min-h-total px-4 z-0">
+      <main className="flex flex-col justify-center m-auto max-w-screen-lg min-h-total px-4 z-0">
         {children}
-      </div>
+      </main>
       <Footer />
     </div>
   );

@@ -12,6 +12,7 @@ const Alert: React.FC = () => {
   const loadouts = useAppSelector((state) => state.loadouts.alert);
   const user = useAppSelector((state) => state.user.alert);
   const auth = useAppSelector((state) => state.auth.alert);
+  const codData = useAppSelector((state) => state.codData.alert);
 
   const type = (): any => {
     if (loadouts.type !== null) {
@@ -22,6 +23,9 @@ const Alert: React.FC = () => {
     }
     if (auth.type !== null) {
       return auth.type;
+    }
+    if (codData.type !== null) {
+      return codData.type;
     }
     return "";
   };
@@ -36,6 +40,9 @@ const Alert: React.FC = () => {
     if (auth.msg !== null) {
       return auth.msg;
     }
+    if (codData.msg !== null) {
+      return codData.msg;
+    }
     return "";
   };
 
@@ -44,7 +51,7 @@ const Alert: React.FC = () => {
     const msgFunc = msg();
 
     msg() !== "" && dispatch(generateAlert({ type: typeFunc, msg: msgFunc }));
-  }, [loadouts, user, auth]);
+  }, [loadouts, user, auth, codData]);
 
   useEffect(() => {
     setTimeout(() => {

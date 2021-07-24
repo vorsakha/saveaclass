@@ -19,7 +19,7 @@ const slice = createSlice({
       type: null,
       msg: null,
     },
-  },
+  } as StateTypes,
   reducers: {
     clearLoadouts: (state) => {
       state.loading = false;
@@ -36,32 +36,32 @@ const slice = createSlice({
     builder
       .addCase(
         loadLoadouts.fulfilled,
-        (state: StateTypes, action: PayloadAction<object>) => {
+        (state, action: PayloadAction<object>) => {
           state.loading = false;
           state.loadouts = action.payload;
         }
       )
-      .addCase(loadLoadouts.pending, (state: StateTypes) => {
+      .addCase(loadLoadouts.pending, (state) => {
         state.loading = true;
       })
-      .addCase(loadLoadouts.rejected, (state: StateTypes) => {
+      .addCase(loadLoadouts.rejected, (state) => {
         state.loading = false;
-        state.alert = {
-          type: "danger",
-          msg: "Failed loading loadouts.",
-        };
+        // state.alert = {
+        //   type: "danger",
+        //   msg: "Failed loading loadouts.",
+        // };
       })
-      .addCase(createLoadout.fulfilled, (state: StateTypes) => {
+      .addCase(createLoadout.fulfilled, (state) => {
         state.loading = false;
         state.alert = {
           type: "success",
           msg: "Loadout saved.",
         };
       })
-      .addCase(createLoadout.pending, (state: StateTypes) => {
+      .addCase(createLoadout.pending, (state) => {
         state.loading = true;
       })
-      .addCase(createLoadout.rejected, (state: StateTypes) => {
+      .addCase(createLoadout.rejected, (state) => {
         state.loading = false;
         state.alert = {
           type: "danger",
@@ -70,7 +70,7 @@ const slice = createSlice({
       })
       .addCase(
         deleteLoadout.fulfilled,
-        (state: StateTypes, action: PayloadAction<object>) => {
+        (state, action: PayloadAction<object>) => {
           state.loading = false;
           state.alert = {
             type: "success",
@@ -79,10 +79,10 @@ const slice = createSlice({
           state.loadouts = action.payload;
         }
       )
-      .addCase(deleteLoadout.pending, (state: StateTypes) => {
+      .addCase(deleteLoadout.pending, (state) => {
         state.loading = true;
       })
-      .addCase(deleteLoadout.rejected, (state: StateTypes) => {
+      .addCase(deleteLoadout.rejected, (state) => {
         state.loading = false;
         state.alert = {
           type: "danger",

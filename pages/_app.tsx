@@ -20,6 +20,7 @@ import authReducer from "../Redux/auth/authSlice";
 import loadoutReducer from "../Redux/loadout/loadoutSlice";
 import userReducer from "../Redux/user/userSlice";
 import alertReducer from "../Redux/alert/alertSlice";
+import codDataReducer from "../Redux/codData/codDataSlice";
 
 // Redux Config
 const reducer = combineReducers({
@@ -27,6 +28,7 @@ const reducer = combineReducers({
   loadouts: loadoutReducer,
   user: userReducer,
   alert: alertReducer,
+  codData: codDataReducer,
 });
 
 // Redux store

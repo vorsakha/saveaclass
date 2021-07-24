@@ -13,7 +13,7 @@ type FormTypes = {
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { auth } = useAppSelector((state) => state);
+  const { loading } = useAppSelector((state) => state.auth);
 
   let router = useRouter();
 
@@ -21,7 +21,6 @@ const Login: React.FC = () => {
     email: "",
     password: "",
   });
-  const [loading, setLoading] = useState<boolean>(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormInput({
@@ -40,16 +39,8 @@ const Login: React.FC = () => {
     router.push("/");
   };
 
-  useEffect(() => {
-    if (auth.loading) {
-      setLoading(true);
-    } else {
-      setLoading(false);
-    }
-  }, [auth.loading]);
-
   return (
-    <>
+    <div className="flex flex-col items-center justify-center w-full flex-1 md:px-20 text-center">
       <h1 className="flex flex-col md:block md:text-6xl text-5xl font-bold">
         Welcome to{" "}
         <span className="text-green-500 font-blops font-thin uppercase w-full">
@@ -87,11 +78,13 @@ const Login: React.FC = () => {
             autoComplete="current-password"
           />
           <div className="flex justify-center mt-2">
-            <Button type="submit">Login</Button>
+            <Button disabled={loading} type="submit">
+              Login
+            </Button>
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -16,9 +16,9 @@ type FormTypes = {
 
 const SignUp: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { auth } = useAppSelector((state) => state);
+  const { loading } = useAppSelector((state) => state.auth);
 
-  let router = useRouter();
+  //const router = useRouter();
 
   const [formInput, setFormInput] = useState<FormTypes>({
     email: "",
@@ -27,7 +27,6 @@ const SignUp: React.FC = () => {
     gamertag: "",
     platform: "",
   });
-  const [loading, setLoading] = useState<boolean>(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormInput({
@@ -51,14 +50,6 @@ const SignUp: React.FC = () => {
       }
     }
   };
-
-  useEffect(() => {
-    if (auth.loading) {
-      setLoading(true);
-    } else {
-      setLoading(false);
-    }
-  }, [auth.loading]);
 
   return (
     <div className="w-full max-w-md mt-6">
@@ -124,6 +115,7 @@ const SignUp: React.FC = () => {
         <div className="flex justify-center mt-2">
           <button
             className={`hover:bg-green-600 px-6 py-2 rounded font-medium inline-block shadow-lg bg-green-500 focus:bg-green-600 ring-black ring-opacity-5 transition ease-in-out disabled:opacity-40`}
+            disabled={loading}
             type="submit"
           >
             Create Account

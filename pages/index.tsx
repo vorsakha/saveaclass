@@ -4,7 +4,7 @@ import { useEffect } from "react";
 // Redux
 import { useAppDispatch, useAppSelector } from "../Redux/utils/hooks";
 import { loadUser } from "../Redux/auth/authThunk";
-import { loadLoadouts } from "../Redux/loadout/loadoutThunk";
+// import { loadLoadouts } from "../Redux/loadout/loadoutThunk";
 
 // Components
 import Dashboard from "../components/Dashboard";
@@ -17,7 +17,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(loadUser());
-    dispatch(loadLoadouts());
+    // dispatch(loadLoadouts());
   }, []);
 
   return (
@@ -27,9 +27,7 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex flex-col items-center justify-center w-full flex-1 md:px-20 text-center">
-        {loggedIn ? <Dashboard /> : <Login />}
-      </main>
+      {loggedIn ? <Dashboard /> : <Login />}
     </>
   );
 };

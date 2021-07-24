@@ -4,7 +4,7 @@ import { loadUser, logUser } from "./authThunk";
 // Types
 type StateTypes = {
   loggedIn?: boolean;
-  alert?: {
+  alert: {
     type: string | null;
     msg: string | null;
   };
