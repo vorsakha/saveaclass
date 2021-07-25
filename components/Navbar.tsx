@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
         </Link>
         <div className="flex flex-row justify-end items-center">
           {loggedIn && (
-            <NextLink success href="/">
+            <NextLink success href="/my-classes">
               My Classes
             </NextLink>
           )}

@@ -9,7 +9,7 @@ const Alert: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const alert = useAppSelector((state) => state.alert);
-  const loadouts = useAppSelector((state) => state.loadouts.alert);
+  const loadouts = useAppSelector((state) => state.loadout.alert);
   const user = useAppSelector((state) => state.user.alert);
   const auth = useAppSelector((state) => state.auth.alert);
   const codData = useAppSelector((state) => state.codData.alert);

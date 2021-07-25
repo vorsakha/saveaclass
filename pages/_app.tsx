@@ -25,7 +25,7 @@ import codDataReducer from "../Redux/codData/codDataSlice";
 // Redux Config
 const reducer = combineReducers({
   auth: authReducer,
-  loadouts: loadoutReducer,
+  loadout: loadoutReducer,
   user: userReducer,
   alert: alertReducer,
   codData: codDataReducer,
