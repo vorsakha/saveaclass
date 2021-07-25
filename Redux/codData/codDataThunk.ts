@@ -4,12 +4,21 @@ import axios from "axios";
 const url = process.env.API_URL;
 
 // Get multiplayer data from api
-export const getMpData = createAsyncThunk("codData/loadMpData", async () => {
-  try {
-    const mpData = await axios.get(`${url}/cod`);
+export const getMpData = createAsyncThunk(
+  "codData/loadMpData",
+  async (body: object) => {
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
 
-    return mpData.data;
-  } catch (error) {
-    console.error("Error fetching COD data");
+      const mpData = await axios.post(`${url}/cod`, body, config);
+
+      return mpData.data;
+    } catch (error) {
+      console.error("Error fetching COD data");
+    }
   }
-});
+);

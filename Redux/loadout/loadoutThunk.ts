@@ -7,12 +7,21 @@ const url = process.env.API_URL;
 
 // Types
 type LoadTypes = {
+  matchId: string;
   primary: string;
   secondary: string;
-  perks: string[];
+  perks: {
+    label: string;
+    imageMainUi: string;
+  }[];
   tactical: string;
   lethal: string;
   kdRatio: number;
+  extraPerks: {
+    label: string;
+    imageMainUi: string;
+  }[];
+  killstreaks: { label: string }[];
 };
 
 // Load Loadouts from api
@@ -30,12 +39,15 @@ export const loadLoadouts = createAsyncThunk(
     loadouts.data.forEach((l: any) =>
       data.push(
         new loadoutModel({
+          matchId: l.matchId,
           primary: l.primary,
           secondary: l.secondary,
           perks: l.perks,
           tactical: l.tactical,
           lethal: l.lethal,
           kdRatio: l.kdRatio,
+          extraPerks: l.kdRatio,
+          killstreaks: l.kdRatio,
         })
       )
     );
@@ -67,12 +79,15 @@ export const createLoadout = createAsyncThunk(
     loadouts.data.forEach((l: any) =>
       data.push(
         new loadoutModel({
+          matchId: l.matchId,
           primary: l.primary,
           secondary: l.secondary,
           perks: l.perks,
           tactical: l.tactical,
           lethal: l.lethal,
           kdRatio: l.kdRatio,
+          extraPerks: l.kdRatio,
+          killstreaks: l.kdRatio,
         })
       )
     );
@@ -96,12 +111,15 @@ export const deleteLoadout = createAsyncThunk(
     res.data.forEach((l: any) =>
       data.push(
         new loadoutModel({
+          matchId: l.matchId,
           primary: l.primary,
           secondary: l.secondary,
           perks: l.perks,
           tactical: l.tactical,
           lethal: l.lethal,
           kdRatio: l.kdRatio,
+          extraPerks: l.kdRatio,
+          killstreaks: l.kdRatio,
         })
       )
     );

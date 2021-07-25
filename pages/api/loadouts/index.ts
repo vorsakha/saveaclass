@@ -15,17 +15,29 @@ export default auth(async (req: any, res: NextApiResponse) => {
     case "POST":
       // @desc Create favorite loadout
       try {
-        const { primary, secondary, perks, tactical, lethal, kdRatio } =
-          req.body;
-
-        const newLoadout = new Loadout({
-          user: req.user.id,
+        const {
           primary,
           secondary,
           perks,
           tactical,
           lethal,
           kdRatio,
+          extraPerks,
+          killstreaks,
+          matchId,
+        } = req.body;
+
+        const newLoadout = new Loadout({
+          user: req.user.id,
+          matchId,
+          primary,
+          secondary,
+          perks,
+          tactical,
+          lethal,
+          kdRatio,
+          extraPerks,
+          killstreaks,
         });
 
         // Save loadout

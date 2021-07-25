@@ -45,6 +45,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 res.json({
                   user: user.email,
                   admin: user.admin,
+                  gamertag: user.gamertag,
+                  platform: user.platform,
                   token,
                 });
               }

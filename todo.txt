@@ -1,7 +1,6 @@
-
-middleware for deleting stuff
 has to be admin to delete user
 has to be loadout owner to delete it
+* GET USER GAMERTAG AND PLATFORM FOR QUERYNG ACTIVISION DATA *
  
 Get stats of 20 last matches
 Get stats of lifetime

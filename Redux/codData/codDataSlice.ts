@@ -4,6 +4,7 @@ import { getMpData } from "./codDataThunk";
 // Types
 type CodDataTypes = {
   matches: {
+    matchID: string;
     map: string;
     mode: string;
     result: string;
@@ -45,20 +46,20 @@ type CodDataTypes = {
           image: string;
         };
       }[];
-      playerStats: {
-        kills: number;
-        score: number;
-        headshots: number;
-        assists: number;
-        scorePerMinute: number;
-        kdRatio: number;
-        longestStreak: number;
-      };
+    };
+    playerStats: {
+      kills: number;
+      score: number;
+      headshots: number;
+      assists: number;
+      scorePerMinute: number;
+      kdRatio: number;
+      longestStreak: number;
     };
   }[];
 };
 interface StateTypes {
-  codData: null | CodDataTypes;
+  data: null | CodDataTypes;
   loading: boolean;
   alert: {
     type: string | null;
@@ -69,7 +70,7 @@ interface StateTypes {
 const slice = createSlice({
   name: "codData",
   initialState: {
-    codData: null,
+    data: null,
     loading: false,
     alert: {
       type: null,
@@ -79,7 +80,7 @@ const slice = createSlice({
   reducers: {
     clearCodData: (state) => {
       state.loading = false;
-      state.codData = null;
+      state.data = null;
     },
     clearCodDataAlert: (state) => {
       state.alert = {
@@ -94,7 +95,7 @@ const slice = createSlice({
         getMpData.fulfilled,
         (state, action: PayloadAction<CodDataTypes>) => {
           state.loading = false;
-          state.codData = action.payload;
+          state.data = action.payload;
         }
       )
       .addCase(getMpData.pending, (state) => {

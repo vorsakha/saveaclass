@@ -18,15 +18,14 @@ export default auth(async (req: any, res: NextApiResponse) => {
   const { gamertag, platform } = req.body;
 
   switch (method) {
-    case "GET":
+    case "POST":
       // @desc Get mp data
       try {
         const logged = await API.isLoggedIn();
-        console.log(logged);
 
         if (!logged) {
           await API.login(activision.email, activision.password);
-          console.log("connected to Activision");
+          console.log("Connected to Activision.");
         }
 
         const data = await API.MWcombatmp(gamertag, platform);
@@ -34,6 +33,7 @@ export default auth(async (req: any, res: NextApiResponse) => {
         res.send(data);
         return;
       } catch (error) {
+        if (error) console.error(error);
         if (error) return res.status(400).send(error);
       }
       break;

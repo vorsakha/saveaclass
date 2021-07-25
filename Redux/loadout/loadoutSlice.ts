@@ -46,10 +46,10 @@ const slice = createSlice({
       })
       .addCase(loadLoadouts.rejected, (state) => {
         state.loading = false;
-        // state.alert = {
-        //   type: "danger",
-        //   msg: "Failed loading loadouts.",
-        // };
+        state.alert = {
+          type: "danger",
+          msg: "Failed loading classes.",
+        };
       })
       .addCase(createLoadout.fulfilled, (state) => {
         state.loading = false;
@@ -65,7 +65,7 @@ const slice = createSlice({
         state.loading = false;
         state.alert = {
           type: "danger",
-          msg: "Failed saving loadouts.",
+          msg: "Failed saving class.",
         };
       })
       .addCase(
@@ -74,7 +74,7 @@ const slice = createSlice({
           state.loading = false;
           state.alert = {
             type: "success",
-            msg: "Loadout deleted.",
+            msg: "Class deleted.",
           };
           state.loadouts = action.payload;
         }
@@ -86,7 +86,7 @@ const slice = createSlice({
         state.loading = false;
         state.alert = {
           type: "danger",
-          msg: "Failed deleting loadouts.",
+          msg: "Failed deleting class.",
         };
       });
   },

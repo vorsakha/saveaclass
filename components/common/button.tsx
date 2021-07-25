@@ -5,16 +5,18 @@ type ButtonTypes = {
   className?: string;
   type?: "button" | "submit" | "reset" | undefined;
   disabled?: boolean;
+  transparent?: boolean;
 };
 
 const Button: React.FC<ButtonTypes> = ({
   children,
   click,
-  success = true,
   danger,
   className = "",
   type = "button",
   disabled,
+  transparent,
+  success = !transparent,
 }) => {
   return (
     <button
@@ -22,10 +24,13 @@ const Button: React.FC<ButtonTypes> = ({
       disabled={disabled}
       onClick={click}
       className={`${
-        success && "hover:bg-green-600 bg-green-500 focus:bg-green-600"
+        success &&
+        "hover:bg-green-600 bg-green-500 focus:bg-green-600  shadow-lg"
       } ${
-        danger && "hover:bg-gray-400 bg-gray-500 focus:bg-gray-400"
-      }  ${className} px-6 py-2 rounded font-medium inline-block shadow-lg   ring-black ring-opacity-5 transition ease-in-out disabled:opacity-40`}
+        danger && "hover:bg-gray-400 bg-gray-500 focus:bg-gray-400  shadow-lg"
+      } ${
+        transparent && "bg-transparent hover:opacity-80 text-green-500"
+      } ${className} px-6 py-2 rounded font-medium inline-block ring-black ring-opacity-5 transition ease-in-out disabled:opacity-40`}
     >
       {children}
     </button>

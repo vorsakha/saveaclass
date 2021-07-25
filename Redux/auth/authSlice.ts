@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { loadUser, logUser } from "./authThunk";
 
 // Types
@@ -12,6 +12,8 @@ type StateTypes = {
   admin: boolean;
   token: string | null;
   user: string | null;
+  gamertag: string | null;
+  platform: string | null;
 };
 
 const tokenTest = () => {
@@ -27,6 +29,8 @@ const slice = createSlice({
   initialState: {
     token: tokenTest(),
     user: null,
+    gamertag: null,
+    platform: null,
     admin: false,
     loggedIn: false,
     loading: false,
@@ -40,6 +44,8 @@ const slice = createSlice({
     signOut: (state) => {
       state.loggedIn = false;
       state.admin = false;
+      state.gamertag = null;
+      state.platform = null;
       localStorage !== undefined && localStorage.removeItem("token");
       state.token = null;
       state.alert = {
@@ -64,6 +70,8 @@ const slice = createSlice({
         state.token = action.payload.token;
         state.user = action.payload.user;
         state.admin = action.payload.admin;
+        state.gamertag = action.payload.gamertag;
+        state.platform = action.payload.platform;
         state.loggedIn = true;
         state.loading = false;
       })
@@ -86,6 +94,8 @@ const slice = createSlice({
       .addCase(loadUser.fulfilled, (state, action) => {
         state.admin = action.payload.admin;
         state.user = action.payload.user;
+        state.gamertag = action.payload.gamertag;
+        state.platform = action.payload.platform;
         state.loggedIn = true;
         state.loading = false;
       })
