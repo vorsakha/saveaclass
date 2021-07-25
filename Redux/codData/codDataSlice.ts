@@ -95,7 +95,7 @@ const slice = createSlice({
         getMpData.fulfilled,
         (state, action: PayloadAction<CodDataTypes>) => {
           state.loading = false;
-          state.data = action.payload;
+          state.data = action.payload !== undefined ? action.payload : null;
         }
       )
       .addCase(getMpData.pending, (state) => {

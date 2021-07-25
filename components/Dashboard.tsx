@@ -22,6 +22,7 @@ interface ClassTypes {
   killstreaks: { label: string }[];
   tactical: string;
   lethal: string;
+  kdRatio: number;
 }
 
 const Dashboard: React.FC = () => {
@@ -108,6 +109,7 @@ const Dashboard: React.FC = () => {
                           killstreaks: item.player.loadout[0].killstreaks,
                           perks: item.player.loadout[0].perks,
                           extraPerks: item.player.loadout[0].extraPerks,
+                          kdRatio: item.playerStats.kdRatio,
                         })
                       }
                     >
@@ -119,7 +121,7 @@ const Dashboard: React.FC = () => {
           ) : (
             <p>No data yet.</p>
           )}
-          {items < 20 ? (
+          {items < 20 && data !== null ? (
             <div className="flex flex-row justify-center mt-8">
               <Button className="ml-4" click={handlePaginationMore} transparent>
                 Load More
