@@ -28,9 +28,14 @@ const Navbar: React.FC = () => {
         </Link>
         <div className="flex flex-row justify-end items-center">
           {loggedIn && (
-            <NextLink success href="/my-classes">
-              My Classes
-            </NextLink>
+            <>
+              <NextLink className="mr-8" success href="/">
+                Dashboard
+              </NextLink>
+              <NextLink success href="/my-classes">
+                My Classes
+              </NextLink>
+            </>
           )}
           {loggedIn ? (
             <Button

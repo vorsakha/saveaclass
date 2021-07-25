@@ -1,10 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { loadLoadouts } from "../Redux/loadout/loadoutThunk";
 import { useAppDispatch, useAppSelector } from "../Redux/utils/hooks";
+import Button from "./common/button";
 import LoadingSpinner from "./common/loading";
 import MyClassCard from "./common/myClassCard";
 
 const MyClasses = () => {
+  const [items, setItems] = useState(6);
+
   const { loading, loadouts } = useAppSelector((state) => state.loadout);
 
   const dispatch = useAppDispatch();
@@ -13,48 +16,89 @@ const MyClasses = () => {
     dispatch(loadLoadouts());
   }, []);
 
+  const handlePaginationMore = () => {
+    setItems(items + 5);
+  };
+  const handlePaginationLess = () => {
+    setItems(5);
+  };
+
   return (
     <div className="min-h-total">
       {loading && <LoadingSpinner />}
       <h1 className="text-start text-2xl my-4">My Classes</h1>
-      <div className="mt-4">
+      <div className="my-4">
         {loadouts.length === 0 ? (
           <p>No classes saved.</p>
         ) : (
-          <ul className="flex flex-row flex-wrap gap-4">
-            {loadouts.map((item, key) => (
-              <MyClassCard key={key}>
-                <h2 className="font-blops text-xl text-center text-green-500">
-                  {item.primary} - KDR {item.kdRatio.toFixed(2)}
-                </h2>
-                <p>
-                  Secodary: <span className="font-bold">{item.secondary}</span>
-                </p>
-                <p>
-                  Tactical: <span className="font-bold">{item.tactical}</span>
-                </p>
-                <p>
-                  Lethal: <span className="font-bold">{item.lethal}</span>
-                </p>
-                <p>Perks:</p>
-                <ul>
-                  {item.perks.map((p, key) => {
-                    <li key={key}>{p.label}</li>;
-                  })}
-                  {item.extraPerks.map((e, key) => {
-                    <li key={key}>{e.label}</li>;
-                  })}
-                </ul>
-                <p>Killstreaks:</p>
-                <ul>
-                  {item.killstreaks.map((k, key) => {
-                    <li key={key}>{k.label}</li>;
-                  })}
-                </ul>
-              </MyClassCard>
-            ))}
+          <ul className="grid sm:grid-cols-3 gap-4 justify-center w-full">
+            {loadouts.map(
+              (item, key) =>
+                key < items && (
+                  <MyClassCard key={key}>
+                    <h2 className="font-blops text-xl text-center text-green-500 mb-4 border-b border-green-600">
+                      {item.primary} - KDR {item.kdRatio.toFixed(2)}
+                    </h2>
+                    <p>
+                      Secodary:{" "}
+                      <span className="font-bold">{item.secondary}</span>
+                    </p>
+                    <p>
+                      Tactical:{" "}
+                      <span className="font-bold">{item.tactical}</span>
+                    </p>
+                    <p>
+                      Lethal: <span className="font-bold">{item.lethal}</span>
+                    </p>
+                    <p>Perks:</p>
+                    <ul className="pl-8">
+                      {item.perks.map((p, key) => (
+                        <li className="list-disc" key={key}>
+                          <span className="font-bold">{p.label}</span>
+                        </li>
+                      ))}
+                      {item.extraPerks.map((e, key) => (
+                        <li className="list-disc" key={key}>
+                          <span className="font-bold">{e.label}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p>Killstreaks:</p>
+                    <ul className="pl-8">
+                      {item.killstreaks.map((k, key) => (
+                        <li className="list-disc" key={key}>
+                          <span className="font-bold">{k.label}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </MyClassCard>
+                )
+            )}
           </ul>
         )}
+        {items < 20
+          ? loadouts.length === 0 && (
+              <div className="flex flex-row justify-center mt-8">
+                <Button
+                  className="ml-4"
+                  click={handlePaginationMore}
+                  transparent
+                >
+                  Load More
+                </Button>
+              </div>
+            )
+          : loadouts.length === 0 && (
+              <div className="flex flex-row justify-center mt-8">
+                <Button
+                  className="ml-4"
+                  click={handlePaginationLess}
+                  transparent
+                >
+                  Load less
+                </Button>
+              </div>
+            )}
       </div>
     </div>
   );

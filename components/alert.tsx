@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { clearAlert, generateAlert } from "../Redux/alert/alertSlice";
 import { clearAuthAlert } from "../Redux/auth/authSlice";
+import { clearCodDataAlert } from "../Redux/codData/codDataSlice";
 import { clearLoadoutsAlert } from "../Redux/loadout/loadoutSlice";
 import { clearUserAlert } from "../Redux/user/userSlice";
 import { useAppDispatch, useAppSelector } from "../Redux/utils/hooks";
@@ -13,6 +14,7 @@ const Alert: React.FC = () => {
   const user = useAppSelector((state) => state.user.alert);
   const auth = useAppSelector((state) => state.auth.alert);
   const codData = useAppSelector((state) => state.codData.alert);
+  const show = alert.show;
 
   const type = (): any => {
     if (loadouts.type !== null) {
@@ -29,7 +31,6 @@ const Alert: React.FC = () => {
     }
     return "";
   };
-  const show = alert.show;
   const msg = () => {
     if (loadouts.msg !== null) {
       return loadouts.msg;
@@ -55,10 +56,11 @@ const Alert: React.FC = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      show && dispatch(clearAlert());
       show && dispatch(clearAuthAlert());
       show && dispatch(clearLoadoutsAlert());
       show && dispatch(clearUserAlert());
+      show && dispatch(clearCodDataAlert());
+      show && dispatch(clearAlert());
     }, 3000);
     // eslint-disable-next-line
   }, [show]);

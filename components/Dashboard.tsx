@@ -58,11 +58,10 @@ const Dashboard: React.FC = () => {
       {loading && <LoadingSpinner />}
       <h1 className="text-start text-2xl my-4">Dashboard</h1>
       {loading && (
-        <small>
+        <p>
           COD API is slow at the moment, querying could take a little while.
-        </small>
+        </p>
       )}
-      <br />
       <Button disabled={loading} click={handleGetMpData}>
         Update Data
       </Button>
