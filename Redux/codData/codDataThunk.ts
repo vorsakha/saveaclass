@@ -19,6 +19,7 @@ export const getMpData = createAsyncThunk(
       return mpData.data;
     } catch (error) {
       console.error("Error fetching COD data");
+      throw error;
     }
   }
 );

@@ -46,8 +46,8 @@ export const loadLoadouts = createAsyncThunk(
           tactical: l.tactical,
           lethal: l.lethal,
           kdRatio: l.kdRatio,
-          extraPerks: l.kdRatio,
-          killstreaks: l.kdRatio,
+          extraPerks: l.extraPerks,
+          killstreaks: l.killstreaks,
         })
       )
     );
@@ -86,8 +86,8 @@ export const createLoadout = createAsyncThunk(
           tactical: l.tactical,
           lethal: l.lethal,
           kdRatio: l.kdRatio,
-          extraPerks: l.kdRatio,
-          killstreaks: l.kdRatio,
+          extraPerks: l.extraPerks,
+          killstreaks: l.killstreaks,
         })
       )
     );
@@ -118,8 +118,8 @@ export const deleteLoadout = createAsyncThunk(
           tactical: l.tactical,
           lethal: l.lethal,
           kdRatio: l.kdRatio,
-          extraPerks: l.kdRatio,
-          killstreaks: l.kdRatio,
+          extraPerks: l.extraPerks,
+          killstreaks: l.killstreaks,
         })
       )
     );

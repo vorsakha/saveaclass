@@ -121,19 +121,29 @@ const Dashboard: React.FC = () => {
           ) : (
             <p>No data yet.</p>
           )}
-          {items < 20 && data !== null ? (
-            <div className="flex flex-row justify-center mt-8">
-              <Button className="ml-4" click={handlePaginationMore} transparent>
-                Load More
-              </Button>
-            </div>
-          ) : (
-            <div className="flex flex-row justify-center mt-8">
-              <Button className="ml-4" click={handlePaginationLess} transparent>
-                Load less
-              </Button>
-            </div>
-          )}
+          {items < 20
+            ? data !== null && (
+                <div className="flex flex-row justify-center mt-8">
+                  <Button
+                    className="ml-4"
+                    click={handlePaginationMore}
+                    transparent
+                  >
+                    Load More
+                  </Button>
+                </div>
+              )
+            : data !== null && (
+                <div className="flex flex-row justify-center mt-8">
+                  <Button
+                    className="ml-4"
+                    click={handlePaginationLess}
+                    transparent
+                  >
+                    Load less
+                  </Button>
+                </div>
+              )}
         </ul>
       </div>
     </div>
