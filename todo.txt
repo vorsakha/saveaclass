@@ -1,6 +1,8 @@
 has to be admin to delete user
 has to be loadout owner to delete it
-* perks and killstreaks not showing at myclasses *
+* responsive menu *
+* fix bugs *
+* deploy *
  
 Get stats of 20 last matches
 Get stats of lifetime

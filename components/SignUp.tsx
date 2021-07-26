@@ -18,8 +18,6 @@ const SignUp: React.FC = () => {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.auth);
 
-  //const router = useRouter();
-
   const [formInput, setFormInput] = useState<FormTypes>({
     email: "",
     password: "",
@@ -28,7 +26,9 @@ const SignUp: React.FC = () => {
     platform: "",
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ): void => {
     setFormInput({
       ...formInput,
       [e.target.name]: e.target.value,
@@ -73,27 +73,6 @@ const SignUp: React.FC = () => {
         />
         <input
           className="shadow text-gray-700  appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring ring-1 ring-black ring-opacity-5 mb-2"
-          type="text"
-          name="gamertag"
-          placeholder="Gamertag"
-          onChange={(e) => handleInputChange(e)}
-          value={formInput.gamertag}
-          required
-          autoComplete="current-password"
-        />
-        <input
-          className="shadow text-gray-700  appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring ring-1 ring-black ring-opacity-5 mb-2"
-          type="text"
-          name="platform"
-          placeholder="Platform"
-          onChange={(e) => handleInputChange(e)}
-          value={formInput.platform}
-          required
-          autoComplete="current-password"
-        />
-
-        <input
-          className="shadow text-gray-700  appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring ring-1 ring-black ring-opacity-5 mb-2"
           type="password"
           name="password"
           placeholder="Password"
@@ -112,6 +91,42 @@ const SignUp: React.FC = () => {
           required
           autoComplete="current-password"
         />
+        <input
+          className="shadow text-gray-700  appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring ring-1 ring-black ring-opacity-5 mb-2"
+          type="text"
+          name="gamertag"
+          placeholder="Gamertag"
+          onChange={(e) => handleInputChange(e)}
+          value={formInput.gamertag}
+          required
+          autoComplete="current-password"
+        />
+        <select
+          className="text-gray-700 w-full py-2 px-3 focus:outline-none focus:ring ring-1 ring-black ring-opacity-20 rounded mb-2"
+          name="platform"
+          required
+          onChange={(e) => handleInputChange(e)}
+          value={formInput.platform}
+        >
+          <option className="text-gray-500" value="" disabled defaultValue="">
+            Select
+          </option>
+          <option className="text-gray-700" value="psn">
+            PlayStation
+          </option>
+          <option className="text-gray-700" value="steam">
+            Steam
+          </option>
+          <option className="text-gray-700" value="xbl">
+            XBOX
+          </option>
+          <option className="text-gray-700" value="battle">
+            BattleNET
+          </option>
+          <option className="text-gray-700" value="acti">
+            Activision ID
+          </option>
+        </select>
         <div className="flex justify-center mt-2">
           <button
             className={`hover:bg-green-600 px-6 py-2 rounded font-medium inline-block shadow-lg bg-green-500 focus:bg-green-600 ring-black ring-opacity-5 transition ease-in-out disabled:opacity-40`}

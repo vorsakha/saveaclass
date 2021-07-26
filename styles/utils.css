@@ -7,6 +7,9 @@
   .min-h-total {
     min-height: calc(100vh - 112px);
   }
+  .min-h-mobile {
+    min-height: calc(100vh - 56px);
+  }
 }
 
 * {

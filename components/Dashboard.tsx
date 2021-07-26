@@ -36,7 +36,7 @@ const Dashboard: React.FC = () => {
     if (data === null) {
       dispatch(getMpData({ gamertag, platform }));
     }
-  }, []);
+  }, [gamertag]);
 
   const handleGetMpData = () => {
     dispatch(getMpData({ gamertag, platform }));
@@ -56,14 +56,14 @@ const Dashboard: React.FC = () => {
   return (
     <div className="min-h-total">
       {loading && <LoadingSpinner />}
-      <h1 className="text-start text-2xl my-4">Dashboard</h1>
+      <h1 className="text-start text-2xl my-4"> {gamertag}'s Dashboard</h1>
       {loading && (
         <p>
           COD API is slow at the moment, querying could take a little while.
         </p>
       )}
       <Button disabled={loading} click={handleGetMpData}>
-        Update Data
+        Get Data
       </Button>
       <div className="mt-4">
         <h2 className="text-start text-xl w-full mb-4">My last games</h2>
