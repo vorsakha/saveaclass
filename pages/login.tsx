@@ -4,10 +4,11 @@ import { useEffect } from "react";
 // Redux
 import { useAppDispatch, useAppSelector } from "../Redux/utils/hooks";
 import { loadUser } from "../Redux/auth/authThunk";
+// import { loadLoadouts } from "../Redux/loadout/loadoutThunk";
 
 // Components
 import Dashboard from "../components/Dashboard";
-import About from "../components/About";
+import Login from "../components/Login";
 
 const Home = () => {
   const { loggedIn } = useAppSelector((state) => state.auth);
@@ -22,13 +23,11 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>
-          {loggedIn ? "Dashboard | Save a Class" : "Login | Save a Class"}
-        </title>
+        <title>{loggedIn ? "Save a Class" : "Login | Save a Class"}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {loggedIn ? <Dashboard /> : <About />}
+      <Login />
     </>
   );
 };
