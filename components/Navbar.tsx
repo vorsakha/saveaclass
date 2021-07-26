@@ -20,6 +20,8 @@ const Navbar: React.FC = () => {
     dispatch(signOut());
     dispatch(clearCodData());
     dispatch(clearLoadouts());
+
+    setMobileMenu(false);
   };
 
   return (
@@ -33,7 +35,7 @@ const Navbar: React.FC = () => {
         <div
           className={`${
             mobileMenu
-              ? "absolute bg-gray-600 flex flex-column flex-wrap mt-14 right-0 top-0 py-8 w-screen text-center justify-center overflow-hidden text-xl border-b border-green-500 shadow-sm"
+              ? "absolute bg-gray-600 flex flex-column flex-wrap mt-14 right-0 top-0 py-8 w-screen text-center justify-center overflow-hidden text-xl border-b border-green-500 shadow-sm z-50"
               : "hidden"
           } sm:flex sm:flex-row sm:justify-end items-center`}
         >
@@ -43,6 +45,7 @@ const Navbar: React.FC = () => {
                 className="sm:mr-8 w-full py-4 sm:w-auto"
                 success
                 href="/"
+                click={() => setMobileMenu(false)}
               >
                 Dashboard
               </NextLink>
@@ -50,6 +53,7 @@ const Navbar: React.FC = () => {
                 className="w-full sm:w-auto py-4"
                 success
                 href="/my-classes"
+                click={() => setMobileMenu(false)}
               >
                 My Classes
               </NextLink>
@@ -64,7 +68,12 @@ const Navbar: React.FC = () => {
               Logout
             </Button>
           ) : (
-            <NextLink success href="/sign-up" className="md:ml-8 ml-4">
+            <NextLink
+              click={() => setMobileMenu(false)}
+              success
+              href="/sign-up"
+              className="md:ml-8 ml-4"
+            >
               Create account
             </NextLink>
           )}

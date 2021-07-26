@@ -5,6 +5,7 @@ type ButtonTypes = {
   success?: boolean;
   danger?: boolean;
   className?: string;
+  click?: () => void;
 };
 
 const NextLink: React.FC<ButtonTypes> = ({
@@ -12,6 +13,7 @@ const NextLink: React.FC<ButtonTypes> = ({
   href,
   success = true,
   danger,
+  click,
   className = "",
 }) => {
   return (
@@ -20,6 +22,7 @@ const NextLink: React.FC<ButtonTypes> = ({
         className={`${success && "hover:text-green-600 text-green-500"} ${
           danger && "hover:text-gray-500 text-gray-400"
         } ${className} font-bold cursor-pointer`}
+        onClick={click}
       >
         {children}
       </a>
