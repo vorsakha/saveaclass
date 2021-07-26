@@ -43,7 +43,7 @@ export const loadLoadouts = createAsyncThunk(
       setAuthToken();
     }
 
-    const loadouts = await axios.get(`${url}/loadouts`);
+    const loadouts = await axios.get(`${url}api/loadouts`);
 
     let data: LoadTypes[] = [];
 
@@ -82,9 +82,9 @@ export const createLoadout = createAsyncThunk(
       },
     };
 
-    await axios.post(`${url}/loadouts`, body, config);
+    await axios.post(`${url}api/loadouts`, body, config);
 
-    const loadouts = await axios.get(`${url}/loadouts`);
+    const loadouts = await axios.get(`${url}api/loadouts`);
 
     let data: LoadTypes[] = [];
 
@@ -117,7 +117,7 @@ export const deleteLoadout = createAsyncThunk(
       setAuthToken();
     }
 
-    const res = await axios.delete(`${url}/loadouts/${id}`);
+    const res = await axios.delete(`${url}api/loadouts/${id}`);
 
     let data: LoadTypes[] = [];
 

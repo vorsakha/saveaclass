@@ -11,7 +11,7 @@ export const loadUser = createAsyncThunk("auth/loadUser", async () => {
     setAuthToken();
   }
 
-  const res = await axios.get(`${url}/users/load`);
+  const res = await axios.get(`${url}api/users/load`);
 
   return res.data;
 });
@@ -25,7 +25,7 @@ export const logUser = createAsyncThunk(
       },
     };
 
-    const res = await axios.post(`${url}/auth`, body, config);
+    const res = await axios.post(`${url}api/auth`, body, config);
 
     return res.data;
   }
