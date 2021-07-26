@@ -27,15 +27,22 @@ type CodDataTypes = {
           }[];
         };
         perks: {
+          image: string | null;
+          imageProgression: string;
+          name: string;
           label: string;
           imageMainUi: string;
         }[];
         extraPerks: {
+          image: string | null;
+          imageProgression: string;
+          name: string;
           label: string;
           imageMainUi: string;
         }[];
         killstreaks: {
           label: string;
+          name: string;
         }[];
         tactical: {
           label: string;

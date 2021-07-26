@@ -8,17 +8,26 @@ type LoadoutTypes =
       primary: string;
       secondary: string;
       perks: {
+        image: string | null;
+        imageProgression: string;
+        name: string;
         label: string;
         imageMainUi: string;
       }[];
       extraPerks: {
+        image: string | null;
+        imageProgression: string;
+        name: string;
         label: string;
         imageMainUi: string;
       }[];
       tactical: string;
       lethal: string;
       kdRatio: number;
-      killstreaks: { label: string }[];
+      killstreaks: {
+        label: string;
+        name: string;
+      }[];
     }[];
 
 type StateTypes = {

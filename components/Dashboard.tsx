@@ -63,13 +63,13 @@ const Dashboard: React.FC = () => {
         </p>
       )}
       {data === null && (
-        <Button disabled={loading} click={handleGetMpData}>
+        <Button disabled={loading} click={() => handleGetMpData()}>
           Get Data
         </Button>
       )}
       <div className="mt-4">
         <h2 className="text-start text-xl w-full mb-4">My last games</h2>
-        <ul className="mb-8">
+        <ul className="mb-8 grid sm:block">
           {data !== null ? (
             data?.matches.map(
               (item, key) =>

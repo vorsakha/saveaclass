@@ -33,3 +33,8 @@ Add a theme.extend.fontFamily section to your Tailwind config
 
 - Type safety with extraReducers
 Was getting an error regarding putting a promise inside a redux state. Resolved it by searching through the redux toolkit documentation and correctly making "action" type safe.
+
+- non-serializable value was detected in the state
+Was passing aixos whole result, that apart from data, it contains various other fields related to the request. Although i'm only saving data and not other fields, as the whole res object passes to the store it goes through a middleware called Serializability, which is included in redux-toolkit and enforces Redux recommendation to only store serializable data.
+Serializable means it can be written down as text and converted back to original object without losing information, which doesn't work with functions. A javascript function apart from code also have scope (memory associated to it), which cannot be represented as text.
+Serializability checks the whole payload (it is executed before your data reaches the store, so it doesn't know which parts will be used) and notices config. As config has methods among its members Serializability alerts you that it is not serializable. You could switch the middleware off, but it can detect genuine issues, so it's generally a better idea to just keep only relevant data in the payload.

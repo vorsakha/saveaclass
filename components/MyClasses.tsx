@@ -35,7 +35,7 @@ const MyClasses = () => {
         {loadouts.length === 0 ? (
           <p>No classes saved.</p>
         ) : (
-          <ul className="grid sm:grid-cols-3 gap-4 justify-center w-full">
+          <ul className="grid md:grid-cols-3 gap-4 justify-center w-full">
             {loadouts.map(
               (item, key) =>
                 key < items && (

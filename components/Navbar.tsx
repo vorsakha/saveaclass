@@ -43,16 +43,16 @@ const Navbar: React.FC = () => {
               : "hidden"
           } sm:flex sm:flex-row sm:justify-end items-center`}
         >
+          <NextLink
+            className="sm:mr-8 w-full py-4 sm:w-auto"
+            success
+            href="/"
+            click={() => setMobileMenu(false)}
+          >
+            {loggedIn ? "Dashboard" : "Home"}
+          </NextLink>
           {loggedIn && (
             <>
-              <NextLink
-                className="sm:mr-8 w-full py-4 sm:w-auto"
-                success
-                href="/"
-                click={() => setMobileMenu(false)}
-              >
-                Dashboard
-              </NextLink>
               <NextLink
                 className="w-full sm:w-auto py-4"
                 success

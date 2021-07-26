@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import loadoutModel from "../Models/loadoutModel";
 import setAuthToken from "../utils/setAuthToken";
 
 const url = process.env.API_URL;
@@ -12,6 +11,9 @@ type LoadTypes = {
   primary: string;
   secondary: string;
   perks: {
+    image: string | null;
+    imageProgression: string;
+    name: string;
     label: string;
     imageMainUi: string;
   }[];
@@ -19,10 +21,16 @@ type LoadTypes = {
   lethal: string;
   kdRatio: number;
   extraPerks: {
+    image: string | null;
+    imageProgression: string;
+    name: string;
     label: string;
     imageMainUi: string;
   }[];
-  killstreaks: { label: string }[];
+  killstreaks: {
+    label: string;
+    name: string;
+  }[];
 };
 
 // Load Loadouts from api
@@ -38,22 +46,19 @@ export const loadLoadouts = createAsyncThunk(
     let data: LoadTypes[] = [];
 
     loadouts.data.forEach((l: any) =>
-      data.push(
-        new loadoutModel({
-          _id: l._id,
-          matchId: l.matchId,
-          primary: l.primary,
-          secondary: l.secondary,
-          perks: l.perks,
-          tactical: l.tactical,
-          lethal: l.lethal,
-          kdRatio: l.kdRatio,
-          extraPerks: l.extraPerks,
-          killstreaks: l.killstreaks,
-        })
-      )
+      data.push({
+        _id: l._id,
+        matchId: l.matchId,
+        primary: l.primary,
+        secondary: l.secondary,
+        perks: l.perks,
+        tactical: l.tactical,
+        lethal: l.lethal,
+        kdRatio: l.kdRatio,
+        extraPerks: l.extraPerks,
+        killstreaks: l.killstreaks,
+      })
     );
-    console.log(data);
 
     return data;
   }
@@ -80,20 +85,18 @@ export const createLoadout = createAsyncThunk(
     let data: LoadTypes[] = [];
 
     loadouts.data.forEach((l: any) =>
-      data.push(
-        new loadoutModel({
-          _id: l._id,
-          matchId: l.matchId,
-          primary: l.primary,
-          secondary: l.secondary,
-          perks: l.perks,
-          tactical: l.tactical,
-          lethal: l.lethal,
-          kdRatio: l.kdRatio,
-          extraPerks: l.extraPerks,
-          killstreaks: l.killstreaks,
-        })
-      )
+      data.push({
+        _id: l._id,
+        matchId: l.matchId,
+        primary: l.primary,
+        secondary: l.secondary,
+        perks: l.perks,
+        tactical: l.tactical,
+        lethal: l.lethal,
+        kdRatio: l.kdRatio,
+        extraPerks: l.extraPerks,
+        killstreaks: l.killstreaks,
+      })
     );
 
     return data;
@@ -113,20 +116,18 @@ export const deleteLoadout = createAsyncThunk(
     let data: LoadTypes[] = [];
 
     res.data.forEach((l: any) =>
-      data.push(
-        new loadoutModel({
-          _id: l._id,
-          matchId: l.matchId,
-          primary: l.primary,
-          secondary: l.secondary,
-          perks: l.perks,
-          tactical: l.tactical,
-          lethal: l.lethal,
-          kdRatio: l.kdRatio,
-          extraPerks: l.extraPerks,
-          killstreaks: l.killstreaks,
-        })
-      )
+      data.push({
+        _id: l._id,
+        matchId: l.matchId,
+        primary: l.primary,
+        secondary: l.secondary,
+        perks: l.perks,
+        tactical: l.tactical,
+        lethal: l.lethal,
+        kdRatio: l.kdRatio,
+        extraPerks: l.extraPerks,
+        killstreaks: l.killstreaks,
+      })
     );
 
     return data;
