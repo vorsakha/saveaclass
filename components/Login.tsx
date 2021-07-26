@@ -50,7 +50,7 @@ const Login: React.FC = () => {
 
       <div className="w-full max-w-md mt-6">
         <form
-          className="bg-gray-600 shadow-lg rounded px-12 pt-6 pb-8 mb-4"
+          className="bg-gray-600 shadow-lg rounded px-6 sm:px-12 pt-6 pb-8 mb-4"
           onSubmit={(e) => handleSubmit(e)}
         >
           {loading && <LoadingSpinner />}
