@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 
-const url = process.env.API_URL;
+const url = process.env.API_URL || "";
 
 // Types
 type LoadTypes = {
