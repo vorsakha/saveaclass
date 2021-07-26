@@ -52,14 +52,16 @@ const Navbar: React.FC = () => {
           >
             {loggedIn ? "Dashboard" : "Home"}
           </NextLink>
-          <NextLink
-            className=" w-full py-4 sm:w-auto"
-            success
-            href="/login"
-            click={() => setMobileMenu(false)}
-          >
-            Login
-          </NextLink>
+          {!loggedIn && (
+            <NextLink
+              className=" w-full py-4 sm:w-auto"
+              success
+              href="/login"
+              click={() => setMobileMenu(false)}
+            >
+              Login
+            </NextLink>
+          )}
           {loggedIn && (
             <>
               <NextLink

@@ -25,9 +25,9 @@ export default auth(async (req: LoadoutRequest, res: NextApiResponse) => {
           const user = await User.findById(req.user.id).select("-password");
 
           return res.send(user);
-        } else {
-          return res.status(400).send("No user token");
         }
+
+        return res.json({ msg: "No token provided" });
       } catch (error) {
         if (error) return res.status(400).send(error);
       }

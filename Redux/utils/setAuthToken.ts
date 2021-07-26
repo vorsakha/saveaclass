@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const setAuthToken = (token: string) => {
+const setAuthToken = (token?: string) => {
   if (token) {
     axios.defaults.headers.Authorization = token;
   } else {

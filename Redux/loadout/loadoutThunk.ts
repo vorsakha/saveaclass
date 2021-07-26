@@ -39,6 +39,8 @@ export const loadLoadouts = createAsyncThunk(
   async () => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
+    } else {
+      setAuthToken();
     }
 
     const loadouts = await axios.get(`${url}/loadouts`);
@@ -70,6 +72,8 @@ export const createLoadout = createAsyncThunk(
   async (body: object) => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
+    } else {
+      setAuthToken();
     }
 
     const config = {
@@ -109,6 +113,8 @@ export const deleteLoadout = createAsyncThunk(
   async (id: string) => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
+    } else {
+      setAuthToken();
     }
 
     const res = await axios.delete(`${url}/loadouts/${id}`);

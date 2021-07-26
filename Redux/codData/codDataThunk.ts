@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import setAuthToken from "../utils/setAuthToken";
 
 const url = process.env.API_URL;
 
@@ -7,6 +8,12 @@ const url = process.env.API_URL;
 export const getMpData = createAsyncThunk(
   "codData/getMpData",
   async (body: object) => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    } else {
+      setAuthToken();
+    }
+
     try {
       const config = {
         headers: {

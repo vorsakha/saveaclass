@@ -16,7 +16,6 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(loadUser());
-    // dispatch(loadLoadouts());
   }, []);
 
   return (
