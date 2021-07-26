@@ -22,6 +22,7 @@ const Navbar: React.FC = () => {
     dispatch(signOut());
     dispatch(clearCodData());
     dispatch(clearLoadouts());
+    localStorage.removeItem("token");
 
     router.push("/");
 

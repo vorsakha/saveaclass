@@ -1,7 +1,6 @@
 has to be admin to delete user
 has to be loadout owner to delete it
-* responsive menu *
-* fix bugs *
+* logout isn't deleting localStorage token *
 * deploy *
  
 Get stats of 20 last matches
