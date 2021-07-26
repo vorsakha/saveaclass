@@ -33,16 +33,24 @@ const Navbar: React.FC = () => {
         <div
           className={`${
             mobileMenu
-              ? "absolute bg-gray-600 flex flex-column mt-14 right-0 top-0 py-8 w-screen text-center justify-center overflow-hidden text-xl border-b border-green-500 shadow-sm"
+              ? "absolute bg-gray-600 flex flex-column flex-wrap mt-14 right-0 top-0 py-8 w-screen text-center justify-center overflow-hidden text-xl border-b border-green-500 shadow-sm"
               : "hidden"
           } sm:flex sm:flex-row sm:justify-end items-center`}
         >
           {loggedIn && (
             <>
-              <NextLink className="mr-8" success href="/">
+              <NextLink
+                className="sm:mr-8 w-full py-4 sm:w-auto"
+                success
+                href="/"
+              >
                 Dashboard
               </NextLink>
-              <NextLink success href="/my-classes">
+              <NextLink
+                className="w-full sm:w-auto py-4"
+                success
+                href="/my-classes"
+              >
                 My Classes
               </NextLink>
             </>
@@ -51,7 +59,7 @@ const Navbar: React.FC = () => {
             <Button
               danger
               click={handleLogout}
-              className="md:ml-8 ml-4 bg-red-500"
+              className="w-full my-4 sm:w-auto md:ml-8 mr-4 ml-4 bg-red-500"
             >
               Logout
             </Button>
