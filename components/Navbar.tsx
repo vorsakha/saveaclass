@@ -1,5 +1,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
+import { GiHamburgerMenu } from "@react-icons/all-files/gi/GiHamburgerMenu";
+import { GiConvergenceTarget } from "@react-icons/all-files/gi/GiConvergenceTarget";
 import { signOut } from "../Redux/auth/authSlice";
 import { clearCodData } from "../Redux/codData/codDataSlice";
 import { clearLoadouts } from "../Redux/loadout/loadoutSlice";
@@ -30,7 +32,9 @@ const Navbar: React.FC = () => {
         </Link>
         <div
           className={`${
-            mobileMenu ? "flex-column min-h-screen justify-center" : "hidden"
+            mobileMenu
+              ? "absolute bg-gray-600 flex flex-column mt-14 right-0 top-0 py-8 w-screen text-center justify-center overflow-hidden text-xl border-b border-green-500 shadow-sm"
+              : "hidden"
           } sm:flex sm:flex-row sm:justify-end items-center`}
         >
           {loggedIn && (
@@ -56,6 +60,20 @@ const Navbar: React.FC = () => {
               Create account
             </NextLink>
           )}
+        </div>
+        <div className="flex align-center sm:hidden">
+          <button
+            className={`${mobileMenu ? "hidden" : "block"}`}
+            onClick={() => setMobileMenu(true)}
+          >
+            <GiHamburgerMenu className="text-2xl" />
+          </button>
+          <button
+            className={`${mobileMenu ? "block" : "hidden"}`}
+            onClick={() => setMobileMenu(false)}
+          >
+            <GiConvergenceTarget className="text-2xl" />
+          </button>
         </div>
       </div>
     </div>
