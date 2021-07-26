@@ -62,9 +62,11 @@ const Dashboard: React.FC = () => {
           COD API is slow at the moment, querying could take a little while.
         </p>
       )}
-      <Button disabled={loading} click={handleGetMpData}>
-        Get Data
-      </Button>
+      {data === null && (
+        <Button disabled={loading} click={handleGetMpData}>
+          Get Data
+        </Button>
+      )}
       <div className="mt-4">
         <h2 className="text-start text-xl w-full mb-4">My last games</h2>
         <ul className="mb-8">

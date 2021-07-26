@@ -1,4 +1,5 @@
 const loadoutModel = class LoadoutTypes {
+  _id: string;
   matchId: string;
   primary: string;
   secondary: string;
@@ -16,6 +17,7 @@ const loadoutModel = class LoadoutTypes {
   killstreaks: { label: string }[];
 
   constructor(loadout: LoadoutTypes) {
+    this._id = loadout._id;
     this.matchId = loadout.matchId;
     this.primary = loadout.primary;
     this.secondary = loadout.secondary;

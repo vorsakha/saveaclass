@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { GiHamburgerMenu } from "@react-icons/all-files/gi/GiHamburgerMenu";
 import { GiConvergenceTarget } from "@react-icons/all-files/gi/GiConvergenceTarget";
+import { useRouter } from "next/router";
 import { signOut } from "../Redux/auth/authSlice";
 import { clearCodData } from "../Redux/codData/codDataSlice";
 import { clearLoadouts } from "../Redux/loadout/loadoutSlice";
@@ -15,11 +16,14 @@ const Navbar: React.FC = () => {
   const { loggedIn } = useAppSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const handleLogout = () => {
     dispatch(signOut());
     dispatch(clearCodData());
     dispatch(clearLoadouts());
+
+    router.push("/");
 
     setMobileMenu(false);
   };

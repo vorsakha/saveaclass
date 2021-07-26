@@ -5,7 +5,7 @@ const url = process.env.API_URL;
 
 // Get multiplayer data from api
 export const getMpData = createAsyncThunk(
-  "codData/loadMpData",
+  "codData/getMpData",
   async (body: object) => {
     try {
       const config = {

@@ -7,6 +7,7 @@ const url = process.env.API_URL;
 
 // Types
 type LoadTypes = {
+  _id: string;
   matchId: string;
   primary: string;
   secondary: string;
@@ -39,6 +40,7 @@ export const loadLoadouts = createAsyncThunk(
     loadouts.data.forEach((l: any) =>
       data.push(
         new loadoutModel({
+          _id: l._id,
           matchId: l.matchId,
           primary: l.primary,
           secondary: l.secondary,
@@ -51,6 +53,7 @@ export const loadLoadouts = createAsyncThunk(
         })
       )
     );
+    console.log(data);
 
     return data;
   }
@@ -79,6 +82,7 @@ export const createLoadout = createAsyncThunk(
     loadouts.data.forEach((l: any) =>
       data.push(
         new loadoutModel({
+          _id: l._id,
           matchId: l.matchId,
           primary: l.primary,
           secondary: l.secondary,
@@ -111,6 +115,7 @@ export const deleteLoadout = createAsyncThunk(
     res.data.forEach((l: any) =>
       data.push(
         new loadoutModel({
+          _id: l._id,
           matchId: l.matchId,
           primary: l.primary,
           secondary: l.secondary,

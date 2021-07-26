@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { loadLoadouts } from "../Redux/loadout/loadoutThunk";
+import { deleteLoadout, loadLoadouts } from "../Redux/loadout/loadoutThunk";
 import { useAppDispatch, useAppSelector } from "../Redux/utils/hooks";
 import Button from "./common/button";
 import LoadingSpinner from "./common/loading";
@@ -15,6 +15,10 @@ const MyClasses = () => {
   useEffect(() => {
     dispatch(loadLoadouts());
   }, []);
+
+  const handleDelete = (id: string) => {
+    dispatch(deleteLoadout(id));
+  };
 
   const handlePaginationMore = () => {
     setItems(items + 5);
@@ -71,13 +75,21 @@ const MyClasses = () => {
                         </li>
                       ))}
                     </ul>
+                    <Button
+                      className="mt-4"
+                      danger
+                      disabled={loading}
+                      click={() => handleDelete(item._id)}
+                    >
+                      Delete
+                    </Button>
                   </MyClassCard>
                 )
             )}
           </ul>
         )}
         {items < 20
-          ? loadouts.length === 0 && (
+          ? loadouts.length > 6 && (
               <div className="flex flex-row justify-center mt-8">
                 <Button
                   className="ml-4"
@@ -88,7 +100,7 @@ const MyClasses = () => {
                 </Button>
               </div>
             )
-          : loadouts.length === 0 && (
+          : loadouts.length !== 0 && (
               <div className="flex flex-row justify-center mt-8">
                 <Button
                   className="ml-4"

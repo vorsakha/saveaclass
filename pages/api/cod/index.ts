@@ -22,7 +22,6 @@ export default auth(async (req: any, res: NextApiResponse) => {
       // @desc Get mp data
       try {
         const logged = await API.isLoggedIn();
-        console.log(logged);
 
         if (!logged) {
           await API.login(activision.email, activision.password);

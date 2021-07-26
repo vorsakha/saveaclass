@@ -3,6 +3,7 @@ import { loadLoadouts, createLoadout, deleteLoadout } from "./loadoutThunk";
 
 type LoadoutTypes =
   | {
+      _id: string;
       matchId: string;
       primary: string;
       secondary: string;
