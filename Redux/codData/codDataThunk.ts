@@ -20,7 +20,7 @@ export const getMpData = createAsyncThunk(
           "Content-type": "application/json",
         },
       };
-      const mpData = await axios.post(`${url}api/cod`, body, config);
+      const mpData = await axios.post(`${url}/api/cod`, body, config);
 
       return mpData.data;
     } catch (error) {

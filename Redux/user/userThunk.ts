@@ -25,7 +25,7 @@ export const logUser = createAsyncThunk(
       },
     };
 
-    const res = await axios.post(`${url}api/auth`, body, config);
+    const res = await axios.post(`${url}/api/auth`, body, config);
 
     return res.data;
   }
@@ -40,7 +40,7 @@ export const signUp = createAsyncThunk(
       },
     };
 
-    const res = await axios.post(`${url}api/users`, body, config);
+    const res = await axios.post(`${url}/api/users`, body, config);
 
     return res.data;
   }
