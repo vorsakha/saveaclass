@@ -37,11 +37,11 @@ const Login: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    if (token) {
-      router.push("/");
-    }
-  }, [token]);
+  // useEffect(() => {
+  //   if (token) {
+  //     router.push("/");
+  //   }
+  // }, [token]);
 
   return (
     <div className="flex flex-col items-center justify-center w-full flex-1 md:px-20 text-center">
