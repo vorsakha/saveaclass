@@ -16,7 +16,7 @@ type FormTypes = {
 
 const SignUp: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { loading } = useAppSelector((state) => state.auth);
+  const { loading } = useAppSelector((state) => state.user);
 
   const [formInput, setFormInput] = useState<FormTypes>({
     email: "",
