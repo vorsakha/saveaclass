@@ -22,7 +22,7 @@ const Home = () => {
     <>
       <Head>
         <title>
-          {loggedIn ? "Dashboard | Save a Class" : "Login | Save a Class"}
+          {loggedIn ? "Dashboard | Save a Class" : "Home | Save a Class"}
         </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
