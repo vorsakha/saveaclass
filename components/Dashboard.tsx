@@ -5,7 +5,7 @@ import Button from "./common/button";
 import LoadingSpinner from "./common/loading";
 import Card from "./common/card";
 import { createLoadout } from "../Redux/loadout/loadoutThunk";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 
 // Types
 interface ClassTypes {
@@ -30,7 +30,7 @@ const Dashboard: React.FC = () => {
   const [items, setItems] = useState(5);
 
   const dispatch = useAppDispatch();
-  const router = useRouter();
+  // const router = useRouter();
 
   const { loading, data } = useAppSelector((state) => state.codData);
   const { gamertag, platform } = useAppSelector((state) => state.auth);
@@ -42,8 +42,8 @@ const Dashboard: React.FC = () => {
   }, [gamertag]);
 
   const handleGetMpData = () => {
-    //dispatch(getMpData({ gamertag, platform }));
-    router.reload();
+    dispatch(getMpData({ gamertag, platform }));
+    // router.reload();
   };
 
   const handlePaginationMore = () => {

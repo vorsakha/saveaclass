@@ -1,5 +1,4 @@
-import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { generateAlert } from "../Redux/alert/alertSlice";
 import { signUp } from "../Redux/user/userThunk";
 import { useAppDispatch, useAppSelector } from "../Redux/utils/hooks";
@@ -41,8 +40,6 @@ const SignUp: React.FC = () => {
     if (formInput.email !== "" || formInput.password !== "") {
       if (formInput.password === formInput.password2) {
         dispatch(signUp(formInput));
-
-        // router.push("/");
       } else {
         dispatch(
           generateAlert({ type: "danger", msg: "Passwords don't match" })
