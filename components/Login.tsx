@@ -13,7 +13,7 @@ type FormTypes = {
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { loading, token } = useAppSelector((state) => state.auth);
+  const { loading, gamertag } = useAppSelector((state) => state.auth);
 
   let router = useRouter();
 
@@ -37,11 +37,11 @@ const Login: React.FC = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (token) {
-  //     router.push("/");
-  //   }
-  // }, [token]);
+  useEffect(() => {
+    if (gamertag) {
+      router.push("/");
+    }
+  }, [gamertag]);
 
   return (
     <div className="flex flex-col items-center justify-center w-full flex-1 md:px-20 text-center">
