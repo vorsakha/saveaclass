@@ -1,29 +1,31 @@
-# Next.js + Tailwind CSS Example
+# ✳️ Save A Class
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v2.2)](https://blog.tailwindcss.com/tailwindcss-2-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+Save a class is a app that grabs your Modern Warfare(2019) match history data, so you can save your best loadouts!
 
-It uses the new [`Just-in-Time Mode`](https://tailwindcss.com/docs/just-in-time-mode) for Tailwind CSS.
+## ✔️ Tech
 
-## Preview
+- Nextjs
+- [call-of-duty-api](https://www.npmjs.com/package/call-of-duty-api)
+- MongoDB
+- Tailwindcss
+- Typescript
+- Authentication (jwt, bcrypt)
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+## ✔️ Functionality
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+- Create account
+- Authentication
+- Save data to DB
+- Delete data from DB
 
-## Deploy your own
+## ✔️Install
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
+```
+yarn install
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+### ✔️ Develop
+
+```
+yarn dev
+```
