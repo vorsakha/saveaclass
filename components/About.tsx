@@ -12,8 +12,7 @@ const About = () => {
 
       <p className="text-center text-xl mb-8">
         Save a class is a app that grabs your Modern Warfare(2019) match history
-        data, so you can save your best loadouts! We use Activision API to fetch
-        multiplayer data by gamertag.
+        data, so you can save your best loadouts!
       </p>
 
       <div className="w-full justify-center flex flex-row items-center">
