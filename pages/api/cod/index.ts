@@ -5,9 +5,8 @@ const API = require("call-of-duty-api")();
 
 dbConnect();
 
-const activision = {
-  email: process.env.ACTIVISION_EMAIL,
-  password: process.env.ACTIVISION_PASSWORD,
+const token = {
+  sso: process.env.TOKEN_SSO,
 };
 
 // @route api/loadouts
@@ -21,12 +20,7 @@ export default auth(async (req: any, res: NextApiResponse) => {
     case "POST":
       // @desc Get mp data
       try {
-        const logged = await API.isLoggedIn();
-
-        if (!logged) {
-          await API.login(activision.email, activision.password);
-          console.log("Connected to Activision.");
-        }
+        await API.loginWithSSO(token.sso);
 
         const data = await API.MWcombatmp(gamertag, platform);
 

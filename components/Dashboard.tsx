@@ -61,11 +61,6 @@ const Dashboard: React.FC = () => {
     <div className="min-h-total">
       {loading && <LoadingSpinner />}
       <h1 className="text-start text-2xl my-4"> {gamertag}'s Dashboard</h1>
-      {loading && (
-        <p>
-          COD API is slow at the moment, querying could take a little while.
-        </p>
-      )}
       {data === null && (
         <Button disabled={loading} click={() => handleGetMpData()}>
           Get Data
