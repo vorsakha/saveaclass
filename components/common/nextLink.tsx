@@ -21,7 +21,7 @@ const NextLink: React.FC<ButtonTypes> = ({
       <a
         className={`${success && "hover:text-green-600 text-green-500"} ${
           danger && "hover:text-gray-500 text-gray-400"
-        } ${className} font-bold cursor-pointer`}
+        } ${className} font-bold cursor-pointer transition-colors`}
         onClick={click}
       >
         {children}
