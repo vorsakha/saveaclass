@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
     <nav className="min-w-screen h-14 px-4">
       <div className="w-full flex flex-row justify-between items-center m-auto h-14 max-w-screen-lg border-b border-gray-600">
         <Link href="/">
-          <a className="md:text-2xl uppercase text-xl text-green-500 font-blops">
+          <a className="md:text-2xl md:pl-4 uppercase text-xl text-green-500 font-blops">
             Save A Class
           </a>
         </Link>
