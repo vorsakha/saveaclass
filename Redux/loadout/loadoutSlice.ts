@@ -1,44 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { loadLoadouts, createLoadout, deleteLoadout } from "./loadoutThunk";
 
-type LoadoutTypes =
-  | {
-      _id: string;
-      matchId: string;
-      primary: string;
-      secondary: string;
-      perks: {
-        image: string | null;
-        imageProgression: string;
-        name: string;
-        label: string;
-        imageMainUi: string;
-      }[];
-      extraPerks: {
-        image: string | null;
-        imageProgression: string;
-        name: string;
-        label: string;
-        imageMainUi: string;
-      }[];
-      tactical: string;
-      lethal: string;
-      kdRatio: number;
-      killstreaks: {
-        label: string;
-        name: string;
-      }[];
-    }[];
-
-type StateTypes = {
-  loadouts: LoadoutTypes | [];
-  loading: boolean;
-  alert: {
-    type: string | null;
-    msg: string | null;
-  };
-};
-
 const slice = createSlice({
   name: "loadout",
   initialState: {
@@ -48,7 +10,7 @@ const slice = createSlice({
       type: null,
       msg: null,
     },
-  } as StateTypes,
+  } as LoadoutStateTypes,
   reducers: {
     clearLoadouts: (state) => {
       state.loading = false;
@@ -65,7 +27,7 @@ const slice = createSlice({
     builder
       .addCase(
         loadLoadouts.fulfilled,
-        (state, action: PayloadAction<LoadoutTypes>) => {
+        (state, action: PayloadAction<LoadoutsTypes[]>) => {
           state.loading = false;
           state.loadouts = action.payload;
         }
@@ -99,7 +61,7 @@ const slice = createSlice({
       })
       .addCase(
         deleteLoadout.fulfilled,
-        (state, action: PayloadAction<LoadoutTypes>) => {
+        (state, action: PayloadAction<LoadoutsTypes[]>) => {
           state.loading = false;
           state.alert = {
             type: "success",

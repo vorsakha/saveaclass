@@ -6,7 +6,7 @@ import Button from "./common/button";
 import LoadingSpinner from "./common/loading";
 
 // Types //
-type FormTypes = {
+type LoginTypes = {
   email: string;
   password: string;
 };
@@ -17,7 +17,7 @@ const Login: React.FC = () => {
 
   let router = useRouter();
 
-  const [formInput, setFormInput] = useState<FormTypes>({
+  const [formInput, setFormInput] = useState<LoginTypes>({
     email: "",
     password: "",
   });

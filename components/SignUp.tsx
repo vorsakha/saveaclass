@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../Redux/utils/hooks";
 import LoadingSpinner from "./common/loading";
 
 // Types
-type FormTypes = {
+type SignUpTypes = {
   email: string;
   password: string;
   password2: string;
@@ -17,7 +17,7 @@ const SignUp: React.FC = () => {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.user);
 
-  const [formInput, setFormInput] = useState<FormTypes>({
+  const [formInput, setFormInput] = useState<SignUpTypes>({
     email: "",
     password: "",
     password2: "",

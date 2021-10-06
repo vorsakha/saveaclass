@@ -4,35 +4,6 @@ import setAuthToken from "../utils/setAuthToken";
 
 const url = process.env.API_URL || "";
 
-// Types
-type LoadTypes = {
-  _id: string;
-  matchId: string;
-  primary: string;
-  secondary: string;
-  perks: {
-    image: string | null;
-    imageProgression: string;
-    name: string;
-    label: string;
-    imageMainUi: string;
-  }[];
-  tactical: string;
-  lethal: string;
-  kdRatio: number;
-  extraPerks: {
-    image: string | null;
-    imageProgression: string;
-    name: string;
-    label: string;
-    imageMainUi: string;
-  }[];
-  killstreaks: {
-    label: string;
-    name: string;
-  }[];
-};
-
 // Load Loadouts from api
 export const loadLoadouts = createAsyncThunk(
   "loadout/loadLoadouts",
@@ -45,7 +16,7 @@ export const loadLoadouts = createAsyncThunk(
 
     const loadouts = await axios.get(`${url}api/loadouts`);
 
-    let data: LoadTypes[] = [];
+    let data: LoadoutsTypes[] = [];
 
     loadouts.data.forEach((l: any) =>
       data.push({
@@ -62,7 +33,7 @@ export const loadLoadouts = createAsyncThunk(
       })
     );
 
-    return data;
+    return data || [];
   }
 );
 
@@ -86,7 +57,7 @@ export const createLoadout = createAsyncThunk(
 
     const loadouts = await axios.get(`${url}api/loadouts`);
 
-    let data: LoadTypes[] = [];
+    let data: LoadoutsTypes[] = [];
 
     loadouts.data.forEach((l: any) =>
       data.push({
@@ -119,7 +90,7 @@ export const deleteLoadout = createAsyncThunk(
 
     const res = await axios.delete(`${url}api/loadouts/${id}`);
 
-    let data: LoadTypes[] = [];
+    let data: LoadoutsTypes[] = [];
 
     res.data.forEach((l: any) =>
       data.push({

@@ -65,14 +65,6 @@ type CodDataTypes = {
     };
   }[];
 };
-interface StateTypes {
-  data: null | CodDataTypes;
-  loading: boolean;
-  alert: {
-    type: string | null;
-    msg: string | null;
-  };
-}
 
 const slice = createSlice({
   name: "codData",
@@ -83,7 +75,7 @@ const slice = createSlice({
       type: null,
       msg: null,
     },
-  } as StateTypes,
+  } as CodStateTypes,
   reducers: {
     clearCodData: (state) => {
       state.loading = false;
