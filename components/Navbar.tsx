@@ -2,32 +2,17 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { GiHamburgerMenu } from "@react-icons/all-files/gi/GiHamburgerMenu";
 import { GiConvergenceTarget } from "@react-icons/all-files/gi/GiConvergenceTarget";
-import { useRouter } from "next/router";
-import { signOut } from "../Redux/auth/authSlice";
-import { clearCodData } from "../Redux/codData/codDataSlice";
-import { clearLoadouts } from "../Redux/loadout/loadoutSlice";
-import { useAppDispatch, useAppSelector } from "../Redux/utils/hooks";
+import { useAppSelector } from "../Redux/hooks";
 import Button from "./common/button";
 import NextLink from "./common/nextLink";
+import useLogout from "../hooks/useLogout";
 
 const Navbar: React.FC = () => {
   const [mobileMenu, setMobileMenu] = useState<boolean>(false);
 
   const { loggedIn } = useAppSelector((state) => state.auth);
 
-  const dispatch = useAppDispatch();
-  const router = useRouter();
-
-  const handleLogout = () => {
-    dispatch(signOut());
-    dispatch(clearCodData());
-    dispatch(clearLoadouts());
-    localStorage.removeItem("token");
-
-    router.push("/");
-
-    setMobileMenu(false);
-  };
+  const { handleLogout } = useLogout(setMobileMenu);
 
   return (
     <nav className="min-w-screen h-14 px-4">
