@@ -5,7 +5,6 @@ import Button from "./common/button";
 import LoadingSpinner from "./common/loading";
 import Card from "./common/card";
 import { createLoadout } from "../Redux/loadout/loadoutThunk";
-// import { useRouter } from "next/router";
 
 // Types
 interface ClassTypes {
@@ -26,13 +25,53 @@ interface ClassTypes {
   kdRatio: number;
 }
 
+interface MatchesTypes {
+  result: string;
+  mode: string;
+  playerStats: {
+    kills: number;
+    kdRatio: number;
+  };
+  matchID: string;
+  player: {
+    loadout: {
+      primaryWeapon: {
+        label: string;
+      };
+      secondaryWeapon: {
+        label: string;
+      };
+      lethal: {
+        label: string;
+      };
+      tactical: {
+        label: string;
+      };
+      killstreaks: {
+        label: string;
+      }[];
+      perks: {
+        label: string;
+        imageMainUi: string;
+      }[];
+      extraPerks: {
+        label: string;
+        imageMainUi: string;
+      }[];
+    }[];
+  };
+}
+
 const Dashboard: React.FC = () => {
   const [items, setItems] = useState(5);
 
   const dispatch = useAppDispatch();
-  // const router = useRouter();
 
-  const { loading, data } = useAppSelector((state) => state.codData);
+  const { codData } = useAppSelector((state) => state);
+  const data: MatchesTypes[] =
+    codData.data !== null ? codData.data.matches : null;
+  const loading = codData.loading;
+
   const { gamertag, platform } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
@@ -43,7 +82,6 @@ const Dashboard: React.FC = () => {
 
   const handleGetMpData = () => {
     dispatch(getMpData({ gamertag, platform }));
-    // router.reload();
   };
 
   const handlePaginationMore = () => {
@@ -70,7 +108,7 @@ const Dashboard: React.FC = () => {
         <h2 className="text-start text-xl w-full mb-4">My last games</h2>
         <ul className="mb-8 grid sm:block">
           {data !== null ? (
-            data?.matches.map(
+            data.map(
               (item, key) =>
                 key < items && (
                   <Card key={key}>
