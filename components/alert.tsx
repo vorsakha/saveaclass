@@ -4,7 +4,7 @@ import { clearAuthAlert } from "../Redux/auth/authSlice";
 import { clearCodDataAlert } from "../Redux/codData/codDataSlice";
 import { clearLoadoutsAlert } from "../Redux/loadout/loadoutSlice";
 import { clearUserAlert } from "../Redux/user/userSlice";
-import { useAppDispatch, useAppSelector } from "../Redux/utils/hooks";
+import { useAppDispatch, useAppSelector } from "../Redux/hooks";
 
 const Alert: React.FC = () => {
   const dispatch = useAppDispatch();

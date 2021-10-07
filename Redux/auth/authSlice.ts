@@ -1,21 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { loadUser, logUser } from "./authThunk";
 
-// Types
-type StateTypes = {
-  loggedIn?: boolean;
-  alert: {
-    type: string | null;
-    msg: string | null;
-  };
-  loading: boolean;
-  admin: boolean;
-  token: string | null;
-  user: string | null;
-  gamertag: string | null;
-  platform: string | null;
-};
-
 const tokenTest = () => {
   if (typeof window !== "undefined") {
     return localStorage.getItem("token");
@@ -38,7 +23,7 @@ const slice = createSlice({
       type: null,
       msg: null,
     },
-  } as StateTypes,
+  } as AuthStateTypes,
 
   reducers: {
     signOut: (state) => {

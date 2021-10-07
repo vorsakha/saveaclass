@@ -1,14 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { signUp } from "./userThunk";
 
-type StateTypes = {
-  loading: boolean;
-  alert: {
-    type: string | null;
-    msg: string | null;
-  };
-};
-
 const slice = createSlice({
   name: "user",
   initialState: {
@@ -28,17 +20,17 @@ const slice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(signUp.fulfilled, (state: StateTypes) => {
+      .addCase(signUp.fulfilled, (state: UserStateTypes) => {
         state.loading = false;
         state.alert = {
           type: "success",
           msg: "Account created.",
         };
       })
-      .addCase(signUp.pending, (state: StateTypes) => {
+      .addCase(signUp.pending, (state: UserStateTypes) => {
         state.loading = true;
       })
-      .addCase(signUp.rejected, (state: StateTypes) => {
+      .addCase(signUp.rejected, (state: UserStateTypes) => {
         state.loading = false;
         state.alert = {
           type: "danger",

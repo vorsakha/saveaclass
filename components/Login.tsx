@@ -1,41 +1,16 @@
 import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
-import { logUser } from "../Redux/auth/authThunk";
-import { useAppDispatch, useAppSelector } from "../Redux/utils/hooks";
+import React, { useEffect } from "react";
+import useLogin from "../hooks/useLogin";
+import { useAppSelector } from "../Redux/hooks";
 import Button from "./common/button";
 import LoadingSpinner from "./common/loading";
 
-// Types //
-type FormTypes = {
-  email: string;
-  password: string;
-};
-
 const Login: React.FC = () => {
-  const dispatch = useAppDispatch();
   const { loading, gamertag } = useAppSelector((state) => state.auth);
 
+  const { handleSubmit, handleInputChange, formInput } = useLogin();
+
   let router = useRouter();
-
-  const [formInput, setFormInput] = useState<FormTypes>({
-    email: "",
-    password: "",
-  });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setFormInput({
-      ...formInput,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-
-    if (formInput.email !== "" || formInput.password !== "") {
-      dispatch(logUser(formInput));
-    }
-  };
 
   useEffect(() => {
     if (gamertag) {
