@@ -1,17 +1,9 @@
 import Head from "next/head";
-import { useEffect } from "react";
-import { useAppSelector } from "../Redux/utils/hooks";
-import { useRouter } from "next/router";
 import MyClasses from "../components/MyClasses";
+import useCheckIfLoggedIn from "../hooks/useCheckIfLoggedIn";
 
 const MyClassesPage = () => {
-  const { loggedIn } = useAppSelector((state) => state.auth);
-
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!loggedIn) router.push("/");
-  }, []);
+  useCheckIfLoggedIn();
 
   return (
     <>
