@@ -1,33 +1,21 @@
-import { useEffect, useState } from "react";
-import { deleteLoadout, loadLoadouts } from "../Redux/loadout/loadoutThunk";
-import { useAppDispatch, useAppSelector } from "../Redux/utils/hooks";
+import { useAppSelector } from "../Redux/hooks";
 import Button from "./common/button";
 import LoadingSpinner from "./common/loading";
 import MyClassCard from "./common/myClassCard";
+import useLoadLoadouts from "../hooks/useLoadLoadouts";
+import useDeleteLoadout from "../hooks/useDeleteLoadout";
+import usePagination from "../hooks/usePagination";
 
 const MyClasses = () => {
-  const [items, setItems] = useState(6);
-
   const { loadout } = useAppSelector((state) => state);
   const loadouts: LoadoutsTypes[] = loadout.loadouts;
   const loading = loadout.loading;
 
-  const dispatch = useAppDispatch();
+  useLoadLoadouts();
 
-  useEffect(() => {
-    dispatch(loadLoadouts());
-  }, []);
+  const { handleDelete } = useDeleteLoadout();
 
-  const handleDelete = (id: string) => {
-    dispatch(deleteLoadout(id));
-  };
-
-  const handlePaginationMore = () => {
-    setItems(items + 5);
-  };
-  const handlePaginationLess = () => {
-    setItems(5);
-  };
+  const { items, setPagination } = usePagination();
 
   return (
     <div className="min-h-total">
@@ -96,7 +84,7 @@ const MyClasses = () => {
               <div className="flex flex-row justify-center mt-8">
                 <Button
                   className="ml-4"
-                  click={handlePaginationMore}
+                  click={() => setPagination("more")}
                   transparent
                 >
                   Load More
@@ -107,7 +95,7 @@ const MyClasses = () => {
               <div className="flex flex-row justify-center mt-8">
                 <Button
                   className="ml-4"
-                  click={handlePaginationLess}
+                  click={() => setPagination("less")}
                   transparent
                 >
                   Load less
