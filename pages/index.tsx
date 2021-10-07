@@ -1,22 +1,14 @@
 import Head from "next/head";
-import { useEffect } from "react";
+import { useAppSelector } from "../Redux/hooks";
 
-// Redux
-import { useAppDispatch, useAppSelector } from "../Redux/utils/hooks";
-import { loadUser } from "../Redux/auth/authThunk";
-
-// Components
 import Dashboard from "../components/Dashboard";
 import About from "../components/About";
+import useLoadUser from "../hooks/useLoadUser";
 
 const Home = () => {
   const { loggedIn } = useAppSelector((state) => state.auth);
 
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(loadUser());
-  }, []);
+  useLoadUser();
 
   return (
     <>
