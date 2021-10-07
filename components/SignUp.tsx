@@ -1,52 +1,12 @@
-import React, { useState } from "react";
-import { generateAlert } from "../Redux/alert/alertSlice";
-import { signUp } from "../Redux/user/userThunk";
-import { useAppDispatch, useAppSelector } from "../Redux/utils/hooks";
+import React from "react";
+import { useAppSelector } from "../Redux/hooks";
 import LoadingSpinner from "./common/loading";
-
-// Types
-type SignUpTypes = {
-  email: string;
-  password: string;
-  password2: string;
-  gamertag: string;
-  platform: string;
-};
+import useSignUp from "../hooks/useSignUp";
 
 const SignUp: React.FC = () => {
-  const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.user);
 
-  const [formInput, setFormInput] = useState<SignUpTypes>({
-    email: "",
-    password: "",
-    password2: "",
-    gamertag: "",
-    platform: "",
-  });
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ): void => {
-    setFormInput({
-      ...formInput,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-
-    if (formInput.email !== "" || formInput.password !== "") {
-      if (formInput.password === formInput.password2) {
-        dispatch(signUp(formInput));
-      } else {
-        dispatch(
-          generateAlert({ type: "danger", msg: "Passwords don't match" })
-        );
-      }
-    }
-  };
+  const { formInput, handleInputChange, handleSubmit } = useSignUp();
 
   return (
     <div className="w-full max-w-md mt-6">
