@@ -8,7 +8,9 @@ import MyClassCard from "./common/myClassCard";
 const MyClasses = () => {
   const [items, setItems] = useState(6);
 
-  const { loading, loadouts } = useAppSelector((state) => state.loadout);
+  const { loadout } = useAppSelector((state) => state);
+  const loadouts: LoadoutsTypes[] = loadout.loadouts;
+  const loading = loadout.loading;
 
   const dispatch = useAppDispatch();
 
@@ -37,41 +39,42 @@ const MyClasses = () => {
         ) : (
           <ul className="grid md:grid-cols-3 gap-4 justify-center w-full">
             {loadouts.map(
-              (item, key) =>
+              (loadout, key) =>
                 key < items && (
                   <MyClassCard key={key}>
                     <h2 className="font-blops text-xl text-center text-green-500 mb-4 border-b border-green-600">
-                      {item.primary} - KDR {item.kdRatio.toFixed(2)}
+                      {loadout.primary} - KDR {loadout.kdRatio.toFixed(2)}
                     </h2>
                     <p>
                       Secodary:{" "}
-                      <span className="font-bold">{item.secondary}</span>
+                      <span className="font-bold">{loadout.secondary}</span>
                     </p>
                     <p>
                       Tactical:{" "}
-                      <span className="font-bold">{item.tactical}</span>
+                      <span className="font-bold">{loadout.tactical}</span>
                     </p>
                     <p>
-                      Lethal: <span className="font-bold">{item.lethal}</span>
+                      Lethal:{" "}
+                      <span className="font-bold">{loadout.lethal}</span>
                     </p>
                     <p>Perks:</p>
                     <ul className="pl-8">
-                      {item.perks.map((p, key) => (
+                      {loadout.perks.map((perk, key) => (
                         <li className="list-disc" key={key}>
-                          <span className="font-bold">{p.label}</span>
+                          <span className="font-bold">{perk.label}</span>
                         </li>
                       ))}
-                      {item.extraPerks.map((e, key) => (
+                      {loadout.extraPerks.map((extraPerk, key) => (
                         <li className="list-disc" key={key}>
-                          <span className="font-bold">{e.label}</span>
+                          <span className="font-bold">{extraPerk.label}</span>
                         </li>
                       ))}
                     </ul>
                     <p>Killstreaks:</p>
                     <ul className="pl-8">
-                      {item.killstreaks.map((k, key) => (
+                      {loadout.killstreaks.map((killStreak, key) => (
                         <li className="list-disc" key={key}>
-                          <span className="font-bold">{k.label}</span>
+                          <span className="font-bold">{killStreak.label}</span>
                         </li>
                       ))}
                     </ul>
@@ -79,7 +82,7 @@ const MyClasses = () => {
                       className="mt-4"
                       danger
                       disabled={loading}
-                      click={() => handleDelete(item._id)}
+                      click={() => handleDelete(loadout._id)}
                     >
                       Delete
                     </Button>
