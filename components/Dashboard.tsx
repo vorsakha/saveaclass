@@ -1,30 +1,12 @@
-import { useEffect, useState } from "react";
-import { getMpData } from "../Redux/codData/codDataThunk";
-import { useAppDispatch, useAppSelector } from "../Redux/utils/hooks";
+import { useAppSelector } from "../Redux/hooks";
 import Button from "./common/button";
 import LoadingSpinner from "./common/loading";
 import Card from "./common/card";
-import { createLoadout } from "../Redux/loadout/loadoutThunk";
+import usePagination from "../hooks/usePagination";
+import useGetMpData from "../hooks/useGetMpData";
+import useSaveClass from "../hooks/useSaveClass";
 
 // Types
-interface ClassTypes {
-  matchId: string;
-  primary: string;
-  secondary: string;
-  perks: {
-    label: string;
-    imageMainUi: string;
-  }[];
-  extraPerks: {
-    label: string;
-    imageMainUi: string;
-  }[];
-  killstreaks: { label: string }[];
-  tactical: string;
-  lethal: string;
-  kdRatio: number;
-}
-
 interface MatchesTypes {
   result: string;
   mode: string;
@@ -63,37 +45,18 @@ interface MatchesTypes {
 }
 
 const Dashboard: React.FC = () => {
-  const [items, setItems] = useState(5);
-
-  const dispatch = useAppDispatch();
+  const { items, setPagination } = usePagination();
 
   const { codData } = useAppSelector((state) => state);
   const data: MatchesTypes[] =
     codData.data !== null ? codData.data.matches : null;
   const loading = codData.loading;
 
-  const { gamertag, platform } = useAppSelector((state) => state.auth);
+  const { gamertag } = useAppSelector((state) => state.auth);
 
-  useEffect(() => {
-    if (data === null) {
-      dispatch(getMpData({ gamertag, platform }));
-    }
-  }, [gamertag]);
+  const { handleGetMpData } = useGetMpData();
 
-  const handleGetMpData = () => {
-    dispatch(getMpData({ gamertag, platform }));
-  };
-
-  const handlePaginationMore = () => {
-    setItems(items + 5);
-  };
-  const handlePaginationLess = () => {
-    setItems(5);
-  };
-
-  const handleSaveClass = (loadout: ClassTypes): any => {
-    dispatch(createLoadout(loadout));
-  };
+  const { handleSaveClass } = useSaveClass();
 
   return (
     <div className="min-h-total">
@@ -162,14 +125,14 @@ const Dashboard: React.FC = () => {
           {items < 20
             ? data !== null && (
                 <div className="flex flex-row justify-center mt-8">
-                  <Button click={handlePaginationMore} transparent>
+                  <Button click={() => setPagination("more")} transparent>
                     Load More
                   </Button>
                 </div>
               )
             : data !== null && (
                 <div className="flex flex-row justify-center mt-8">
-                  <Button click={handlePaginationLess} transparent>
+                  <Button click={() => setPagination("less")} transparent>
                     Load less
                   </Button>
                 </div>
